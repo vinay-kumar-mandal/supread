@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f9fafb; /* क्लीन बैकग्राउंड */
+    color: #111827;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #047857; /* डार्क ग्रीन - ट्रस्ट के लिए */
+}
+
+.logo span {
+    color: #111827;
+}
+
+.search-bar input {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    width: 350px;
+    font-size: 14px;
+    background: #f3f4f6;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-bar input:focus {
+    border-color: #047857;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.btn-login {
+    background: #111827;
+    color: #ffffff !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+}
+
+/* Sliding Languages Bar */
+.lang-slider-container {
+    background: #1f2937; /* डार्क बैकग्राउंड ताकि प्रीमियम लगे */
+    padding: 12px 32px;
+}
+
+.lang-slider {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    cursor: grab; /* यूजर को माउस से खींचने का हिंट मिलेगा */
+    padding-bottom: 8px; /* स्क्रोलबार के लिए जगह */
+}
+
+/* स्क्रोलबार का डिज़ाइन */
+.lang-slider::-webkit-scrollbar {
+    height: 4px;
+}
+.lang-slider::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 10px;
+}
+.lang-slider::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 10px;
+}
+
+.lang-btn {
+    text-decoration: none;
+    color: #d1d5db;
+    background: #374151;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    background: #10b981; /* होवर करने पर हाईलाइट */
+    color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    color: #111827;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: #047857;
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #065f46;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background-color: #f3f4f6;
+}
