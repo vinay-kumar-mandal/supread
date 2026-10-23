@@ -3,51 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supread Docs | Premium Developer Documentation</title>
+    <title>Supread Docs | Premium Developer Library</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Main Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">Supread<span>Docs</span></div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search documentation, syntax, or tutorials...">
-        </div>
-        <div class="nav-links">
-            <a href="#">Contribute</a>
-            <a href="#" class="btn-login">Login</a>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <img src="../asset/logo.png" alt="Supread" height="200">
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search documentation, syntax, or guides...">
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" class="nav-btn">Explore</a></li>
+                <li><a href="#" class="nav-btn">Community</a></li>
+                <li><a href="#" class="btn-primary">Sign In</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Sliding Languages Bar -->
-    <div class="lang-slider-container">
-        <div class="lang-slider" id="langSlider">
-            <!-- आगे चलकर आप इन href="/..." में अपने Netlify के पेज का लिंक लगा सकते हैं -->
-            <a href="/html" class="lang-btn">HTML</a>
-            <a href="/css" class="lang-btn">CSS</a>
-            <a href="/javascript" class="lang-btn">JavaScript</a>
-            <a href="/python" class="lang-btn">Python</a>
-            <a href="/cpp" class="lang-btn">C++</a>
-            <a href="/c" class="lang-btn">C</a>
-            <a href="/java" class="lang-btn">Java</a>
-            <a href="/react" class="lang-btn">React</a>
-            <a href="/nodejs" class="lang-btn">Node.js</a>
-            <a href="/sql" class="lang-btn">SQL</a>
-            <a href="/php" class="lang-btn">PHP</a>
-            <a href="/ruby" class="lang-btn">Ruby</a>
+    <!-- Sliding Language Bar -->
+    <div class="lang-bar-container">
+        <div class="container">
+            <div class="lang-slider" id="langSlider">
+                <a href="/python" class="lang-item">Python</a>
+                <a href="/javascript" class="lang-item">JavaScript</a>
+                <a href="/html" class="lang-item">HTML</a>
+                <a href="/css" class="lang-item">CSS</a>
+                <a href="/cpp" class="lang-item">C++</a>
+                <a href="/c" class="lang-item">C</a>
+                <a href="/csharp" class="lang-item">C#</a>
+                <a href="/java" class="lang-item">Java</a>
+                <a href="/typescript" class="lang-item">TypeScript</a>
+                <a href="/go" class="lang-item">Go</a>
+                <a href="/rust" class="lang-item">Rust</a>
+                <a href="/ruby" class="lang-item">Ruby</a>
+                <a href="/php" class="lang-item">PHP</a>
+                <a href="/sql" class="lang-item">SQL</a>
+                <a href="/mongodb" class="lang-item">MongoDB</a>
+                <a href="/react" class="lang-item">React</a>
+                <a href="/nodejs" class="lang-item">Node.js</a>
+            </div>
         </div>
     </div>
 
-    <!-- Hero Section (Motive) -->
+    <!-- Hero Section -->
     <header class="hero">
-        <div class="hero-content">
-            <h1>Learn, Build, and Master Technology</h1>
-            <p>Welcome to Supread Docs. Your ultimate open-source documentation platform for everything related to software development. Clear, precise, and completely free for the developer community.</p>
+        <div class="container hero-content">
+            <span class="badge">Open Source Documentation</span>
+            <h1>The ultimate library for <br><span>Developers</span></h1>
+            <p>Access high-quality, premium documentation for all programming languages, frameworks, and databases in one place. Built for speed, clarity, and precision.</p>
+            
             <div class="hero-buttons">
-                <a href="#start" class="btn-primary">Start Reading</a>
-                <a href="#github" class="btn-outline">View on GitHub</a>
+                <a href="#" class="btn-primary large-btn">Start Reading</a>
+                <a href="#" class="btn-outline large-btn">Contribute on GitHub</a>
             </div>
         </div>
     </header>

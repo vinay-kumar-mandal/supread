@@ -1,35 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Navbar Scroll Effect
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+    });
+
+    // Language Slider Drag functionality
     const slider = document.getElementById("langSlider");
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    // जब माउस क्लिक किया जाए
     slider.addEventListener("mousedown", (e) => {
         isDown = true;
-        slider.style.cursor = "grabbing"; // कर्सर का आइकॉन बदल जाएगा
+        slider.style.cursor = "grabbing";
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
     });
 
-    // जब माउस हटा लिया जाए
     slider.addEventListener("mouseleave", () => {
         isDown = false;
         slider.style.cursor = "grab";
     });
 
-    // जब क्लिक छोड़ दिया जाए
     slider.addEventListener("mouseup", () => {
         isDown = false;
         slider.style.cursor = "grab";
     });
 
-    // जब माउस मूव किया जाए (ड्रैग)
     slider.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // '2' स्क्रॉल की स्पीड है
+        const walk = (x - startX) * 1.5; // Drag speed
         slider.scrollLeft = scrollLeft - walk;
     });
 });
