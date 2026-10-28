@@ -148,12 +148,54 @@ a:focus-visible {
     border-right: 1px solid var(--line)
 }
 
-#sidebar h4 {
-    margin: 18px 10px 6px;
+/* Sidebar Dropdown (Accordion) Styling */
+#sidebar details {
+    margin-bottom: 4px;
+}
+
+#sidebar summary {
+    margin: 15px 10px 5px;
     font-size: 13px;
     color: var(--muted);
     font-weight: 600;
-    letter-spacing: .02em
+    letter-spacing: .02em;
+    cursor: pointer;
+    list-style: none; /* Default arrow hide karega */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+#sidebar summary:hover {
+    background: var(--accent-bg);
+    color: var(--accent);
+}
+
+/* Safari browser support ke liye */
+#sidebar summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Custom Animated Arrow */
+#sidebar summary::after {
+    content: '▼';
+    font-size: 10px;
+    color: inherit;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Jab dropdown band (closed) ho, tab arrow side mein point karega */
+#sidebar details:not([open]) summary::after {
+    transform: rotate(-90deg);
+}
+
+/* Sub-links (Topics) ko thoda andar (indent) karne ke liye */
+#sidebar details a {
+    margin-left: 10px;
 }
 
 #sidebar h4:first-child {

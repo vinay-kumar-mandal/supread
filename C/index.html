@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C Docs</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <button id="menuBtn" class="icon only-mobile" aria-label="Topics">☰</button>
+  <a class="brand" href="#intro"><span class="logo">C</span> C Docs</a>
+  <input id="search" type="search" placeholder="Search topics…" aria-label="Search topics">
+  <button id="themeBtn" class="theme" aria-label="Switch theme"></button>
+</header>
+<div class="layout">
+  <nav id="sidebar" aria-label="Topics"></nav>
+  <main id="content" tabindex="-1"></main>
+  <aside class="editor" aria-label="Code editor">
+    <div class="ed-bar">
+      <strong>Editor</strong>
+      <span id="status">Compiler: online</span>
+      <button id="runBtn" class="run">Run ▶</button>
+    </div>
+    <textarea id="code" spellcheck="false" aria-label="C code"></textarea>
+    <div class="ed-bar"><strong>Output</strong><button id="clearBtn" class="ghost">Clear</button></div>
+    <pre id="out">Press Run or Ctrl+Enter. Needs internet.</pre>
+  </aside>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
