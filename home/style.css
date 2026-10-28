@@ -156,7 +156,7 @@ nav.scrolled {
     font-weight: 500;
     font-size: 14px;
     padding: 10px 12px;
-    border-radius: 50px;
+    border-radius: 20%;
     transition: var(--transition);
     user-select: none;
 }
