@@ -190,9 +190,20 @@ const side = $("#sidebar"), content = $("#content"), code = $("#code"), out = $(
 function buildNav(q = "") {
     let h = "", last = "";
     T.filter(x => x.t.toLowerCase().includes(q.toLowerCase())).forEach(x => {
-        if (x.g !== last) { h += `<h4>${x.g}</h4>`; last = x.g }
+        if (x.g !== last) {
+            // Agar pehle se koi group open hai, toh use close karein
+            if (last !== "") h += `</details>`;
+            
+            // Naya dropdown group banayein ('open' attribute se by default open rahega)
+            h += `<details open><summary>${x.g}</summary>`;
+            last = x.g;
+        }
         h += `<a href="#${x.id}" data-id="${x.id}">${x.t}</a>`;
     });
+    
+    // Last group ko close karein
+    if (last !== "") h += `</details>`;
+    
     side.innerHTML = h || "<h4>No match</h4>";
     mark();
 }
