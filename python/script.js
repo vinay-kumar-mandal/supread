@@ -1,12 +1,93 @@
 const T = [
     {
-        g: "Basics", id: "intro", t: "Introduction", lead: "Python is a readable, general-purpose language used for web, data, automation and AI.",
-        s: [["Hello, world", "Use <code>print()</code> to show output. Indentation (4 spaces) defines blocks — no braces.", `print("Hello, Python!")\nname = "Vinay"\nprint(f"Welcome, {name}")`]]
+        g: "Basics", 
+        id: "intro", 
+        t: "Introduction to Python", 
+        lead: "Python is a powerful, high-level, interpreted programming language renowned for its elegant syntax, dynamic typing, and immense versatility across web development, data science, and automation.",
+        s: [
+            [
+                "Why Python?", 
+                "Created by Guido van Rossum in 1991, Python emphasizes code readability. Its English-like syntax allows developers to express complex concepts in fewer lines of code compared to C++ or Java. It is dynamically typed, meaning variable types are determined at runtime.", 
+                `# Python's elegant syntax in action\nprint("Welcome to Supread Docs!")\n\n# Variables are dynamically typed (no need to declare int/str)\nversion = 3.11\nlanguage = "Python"\n\nprint(f"We are learning {language} version {version}")`
+            ],
+            [
+                "Interpreted & Interactive", 
+                "Python is an interpreted language. The Python interpreter executes code line by line without needing a separate compilation step. This makes debugging easier and allows for highly interactive programming.", 
+                `# Code executes line by line\nprint("Step 1: Initializing...")\nscore = 100\nprint("Step 2: Score loaded.")\n\nif score == 100:\n    print("Step 3: Perfect Score!")`
+            ],
+            [
+                "The Zen of Python", 
+                "Python has a core philosophy guiding its design, which promotes simplicity, readability, and explicitness. You can actually read these guiding principles by importing a special built-in module.", 
+                `# Run this code to reveal Python's philosophy\nimport this`
+            ]
+        ]
     },
     {
-        g: "Basics", id: "variables", t: "Variables & Types", lead: "Variables hold values. Types are inferred at runtime.",
-        s: [["Core types", "<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>None</code>. Check with <code>type()</code>.", `age = 21\nprice = 9.99\nok = True\nnothing = None\nfor v in (age, price, ok, nothing):\n    print(v, type(v).__name__)`],
-        ["Conversion", "Use <code>int()</code>, <code>float()</code>, <code>str()</code> to convert.", `print(int("42") + 1)\nprint(str(3.5) + " kg")`]]
+        g: "Basics", 
+        id: "variables", 
+        t: "Variables & Data Types", 
+        lead: "Variables are named references to objects in memory. Python is dynamically typed, meaning you don't declare types explicitly; the interpreter infers the type automatically at runtime based on the assigned value.",
+        s: [
+            [
+                "Variable Assignment & Rules", 
+                "Variables are created the moment you assign a value to them using the <code>=</code> operator. Variable names must start with a letter or underscore, can contain alphanumeric characters, and are strictly case-sensitive.", 
+                `# Assigning values to variables
+user_age = 20
+user_name = "Vinay"
+is_developer = True
+
+# Variable names are case-sensitive
+Age = 25 
+print(f"{user_name} is {user_age} years old.")
+print(f"Developer status: {is_developer}")
+print(f"Note: age ({user_age}) and Age ({Age}) are different variables.")`
+            ],
+            [
+                "Primitive Data Types", 
+                "Python's core primitive types include <code>int</code> (integers), <code>float</code> (decimal numbers), <code>str</code> (text strings), and <code>bool</code> (True/False). You can check a variable's exact type using the built-in <code>type()</code> function.", 
+                `items_count = 10         # int
+temperature = 98.6       # float
+status_msg = "Success"   # str
+is_active = True         # bool
+empty_val = None         # NoneType
+
+# Checking types dynamically
+for val in (items_count, temperature, status_msg, is_active, empty_val):
+    print(f"{repr(val):<10} -> {type(val).__name__}")`
+            ],
+            [
+                "Type Casting (Conversion)", 
+                "Python is strongly typed, meaning it won't automatically mix incompatible types (like adding a string to an integer). You must explicitly convert types using functions like <code>int()</code>, <code>float()</code>, and <code>str()</code>.", 
+                `string_num = "42"
+integer_num = 10
+
+# Convert string to integer for mathematical operations
+total = int(string_num) + integer_num
+print("Total sum:", total)
+
+# Convert integer to string for text concatenation
+message = "The final total is " + str(total)
+print(message)
+
+# String to float
+print("Float value:", float("3.14159"))`
+            ],
+            [
+                "Multiple Assignment", 
+                "Python allows assigning values to multiple variables in a single elegant line. You can unpack sequences or assign the exact same value to multiple variables simultaneously.", 
+                `# Unpacking multiple values in one line
+x, y, z = 10, 20, 30
+print(f"x: {x}, y: {y}, z: {z}")
+
+# Chained assignment for the same value
+a = b = c = 100
+print(f"a: {a}, b: {b}, c: {c}")
+
+# Swapping variables easily without a temporary variable
+x, y = y, x
+print(f"After swap -> x: {x}, y: {y}")`
+            ]
+        ]
     },
     {
         g: "Basics", id: "operators", t: "Operators", lead: "Arithmetic, comparison, logical and membership operators.",
