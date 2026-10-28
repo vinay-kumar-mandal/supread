@@ -1,74 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Basic Syntax | Supread Docs</title>
-    <link rel="stylesheet" href="syntax_style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Docs</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Header -->
-    <header class="docs-header">
-        <div class="logo">
-            <span class="logo-s">S</span>upread
-        </div>
-        <div class="header-right">
-            <input type="text" class="search-box" placeholder="Search docs...">
-            <button id="themeToggle" class="theme-btn">🌙 Dark</button>
-        </div>
-    </header>
-
-    <!-- Main Layout -->
-    <div class="docs-container">
-        
-        <!-- Left Sidebar (Navigation) -->
-        <aside class="sidebar-left">
-            <h3>Python Tutorial</h3>
-            <ul class="nav-list">
-                <li><a href="#" class="active">Basic Syntax</a></li>
-                <li><a href="#">Variables</a></li>
-                <li><a href="#">Data Types</a></li>
-                <li><a href="#">Operators</a></li>
-                <li><a href="#">If...Else</a></li>
-                <li><a href="#">Loops</a></li>
-            </ul>
-        </aside>
-
-        <!-- Center Content (Reading Area) -->
-        <main class="content-area">
-            <h1>Python Basic Syntax</h1>
-            <p>Python ki syntax bahut hi clean aur padhne mein aasan hoti hai. Yeh doosri programming languages ke mukable brackets {} ki jagah indentation (spaces) par nirbhar karti hai.</p>
-            
-            <h2 id="print-statement">The Print Statement</h2>
-            <p>Screen par kuch bhi output dikhane ke liye hum <code>print()</code> function ka use karte hain.</p>
-            
-            <!-- Code Block / Editor Placeholder -->
-            <div class="code-editor-container">
-                <div class="code-header">
-                    <span>example.py</span>
-                    <button class="run-btn">Run Code</button>
-                </div>
-                <pre class="code-block"><code>print("Hello, World!")
-print("Welcome to Supread Docs")</code></pre>
-            </div>
-
-            <h2 id="indentation">Indentation</h2>
-            <p>Python mein code block define karne ke liye spaces ka use hota hai. Agar aap sahi se indent nahi karenge, toh error aayega.</p>
-
-        </main>
-
-        <!-- Right Sidebar (Table of Contents) -->
-        <aside class="sidebar-right">
-            <h3>On this page</h3>
-            <ul class="toc-list">
-                <li><a href="#print-statement">The Print Statement</a></li>
-                <li><a href="#indentation">Indentation</a></li>
-            </ul>
-        </aside>
+<header class="top">
+  <button id="menuBtn" class="icon only-mobile" aria-label="Topics">☰</button>
+  <a class="brand" href="#intro"><span class="logo">Py</span> Python Docs</a>
+  <input id="search" type="search" placeholder="Search topics…" aria-label="Search topics">
+  <button id="themeBtn" class="theme" aria-label="Switch theme"></button>
+</header>
+<div class="layout">
+  <nav id="sidebar" aria-label="Topics"></nav>
+  <main id="content" tabindex="-1"></main>
+  <aside class="editor" aria-label="Code editor">
+    <div class="ed-bar">
+      <strong>Editor</strong>
+      <span id="status">Python not loaded</span>
+      <button id="runBtn" class="run">Run ▶</button>
     </div>
-
-    <script src="syntax_script.js"></script>
+    <textarea id="code" spellcheck="false" aria-label="Python code"></textarea>
+    <div class="ed-bar"><strong>Output</strong><button id="clearBtn" class="ghost">Clear</button></div>
+    <pre id="out">Press Run or Ctrl+Enter.</pre>
+  </aside>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
