@@ -90,8 +90,57 @@ print(f"After swap -> x: {x}, y: {y}")`
         ]
     },
     {
-        g: "Basics", id: "operators", t: "Operators", lead: "Arithmetic, comparison, logical and membership operators.",
-        s: [["Examples", "<code>//</code> is floor division, <code>**</code> is power, <code>in</code> tests membership.", `print(7 / 2, 7 // 2, 7 % 2, 2 ** 10)\nprint(3 < 5 and not 2 > 4)\nprint("a" in "cat")`]]
+        g: "Basics", 
+        id: "operators", 
+        t: "Python Operators", 
+        lead: "Operators are special symbols or keywords that perform calculations, comparisons, or logical evaluations on variables and values.",
+        s: [
+            [
+                "Arithmetic Operators", 
+                "Python allows addition (+), subtraction (-), multiplication (*), and division (/)[cite: 81]. Python uses two multiplication symbols (**) to represent exponents[cite: 81]. The modulo operator (%) divides one number by another number and returns the remainder[cite: 34].", 
+                `# Basic arithmetic operations
+addition = 10 + 5
+subtraction = 10 - 5
+multiplication = 10 * 5
+division = 10 / 5
+
+# Exponents and Modulo
+exponent = 3 ** 2  # 3 squared is 9
+remainder = 10 % 3 # Returns 1
+
+print(f"Add: {addition}, Multiply: {multiplication}")
+print(f"Exponent: {exponent}, Modulo: {remainder}")`
+            ],
+            [
+                "Comparison Operators", 
+                "You can test if two values are equal (==) or not equal using the inequality operator (!=)[cite: 34]. You can also use mathematical comparisons such as less than (<), less than or equal to (<=), greater than (>), and greater than or equal to (>=)[cite: 130].", 
+                `age = 19
+
+# Checking conditions
+is_adult = (age >= 18)
+is_teen = (age < 20)
+is_not_twenty = (age != 20)
+
+print(f"Is adult? {is_adult}")
+print(f"Is teenager? {is_teen}")
+print(f"Is exactly 20? {age == 20}")`
+            ],
+            [
+                "Logical Operators", 
+                "The keyword 'and' checks if two conditions are both True simultaneously[cite: 130]. The keyword 'or' passes when either or both of the individual tests pass[cite: 131].", 
+                `age_0 = 22
+age_1 = 18
+
+# Using 'and' - both conditions must be True
+both_adults = (age_0 >= 18) and (age_1 >= 18)
+
+# Using 'or' - at least one condition must be True
+one_older_than_21 = (age_0 > 21) or (age_1 > 21)
+
+print(f"Are both 18 or older? {both_adults}")
+print(f"Is at least one person older than 21? {one_older_than_21}")`
+            ]
+        ]
     },
     {
         g: "Data types", id: "strings", t: "Strings", lead: "Immutable sequences of characters.",
