@@ -8,17 +8,31 @@ const T = [
             [
                 "Why Python?", 
                 "Created by Guido van Rossum in 1991, Python emphasizes code readability. Its English-like syntax allows developers to express complex concepts in fewer lines of code compared to C++ or Java. It is dynamically typed, meaning variable types are determined at runtime.", 
-                `# Python's elegant syntax in action\nprint("Welcome to Supread Docs!")\n\n# Variables are dynamically typed (no need to declare int/str)\nversion = 3.11\nlanguage = "Python"\n\nprint(f"We are learning {language} version {version}")`
+                `# Python's elegant syntax in action
+print("Welcome to Supread Docs!")
+
+# Variables are dynamically typed (no need to declare int/str)
+version = 3.11
+language = "Python"
+
+print(f"We are learning {language} version {version}")`
             ],
             [
                 "Interpreted & Interactive", 
                 "Python is an interpreted language. The Python interpreter executes code line by line without needing a separate compilation step. This makes debugging easier and allows for highly interactive programming.", 
-                `# Code executes line by line\nprint("Step 1: Initializing...")\nscore = 100\nprint("Step 2: Score loaded.")\n\nif score == 100:\n    print("Step 3: Perfect Score!")`
+                `# Code executes line by line
+print("Step 1: Initializing...")
+score = 100
+print("Step 2: Score loaded.")
+
+if score == 100:
+    print("Step 3: Perfect Score!")`
             ],
             [
                 "The Zen of Python", 
                 "Python has a core philosophy guiding its design, which promotes simplicity, readability, and explicitness. You can actually read these guiding principles by importing a special built-in module.", 
-                `# Run this code to reveal Python's philosophy\nimport this`
+                `# Run this code to reveal Python's philosophy
+import this`
             ]
         ]
     },
@@ -97,7 +111,7 @@ print(f"After swap -> x: {x}, y: {y}")`
         s: [
             [
                 "Arithmetic Operators", 
-                "Python allows addition (+), subtraction (-), multiplication (*), and division (/)[cite: 81]. Python uses two multiplication symbols (**) to represent exponents[cite: 81]. The modulo operator (%) divides one number by another number and returns the remainder[cite: 34].", 
+                "Python allows addition (+), subtraction (-), multiplication (*), and division (/). Python uses two multiplication symbols (**) to represent exponents. The modulo operator (%) divides one number by another number and returns the remainder.", 
                 `# Basic arithmetic operations
 addition = 10 + 5
 subtraction = 10 - 5
@@ -113,7 +127,7 @@ print(f"Exponent: {exponent}, Modulo: {remainder}")`
             ],
             [
                 "Comparison Operators", 
-                "You can test if two values are equal (==) or not equal using the inequality operator (!=)[cite: 34]. You can also use mathematical comparisons such as less than (<), less than or equal to (<=), greater than (>), and greater than or equal to (>=)[cite: 130].", 
+                "You can test if two values are equal (==) or not equal using the inequality operator (!=). You can also use mathematical comparisons such as less than (<), less than or equal to (<=), greater than (>), and greater than or equal to (>=).", 
                 `age = 19
 
 # Checking conditions
@@ -127,7 +141,7 @@ print(f"Is exactly 20? {age == 20}")`
             ],
             [
                 "Logical Operators", 
-                "The keyword 'and' checks if two conditions are both True simultaneously[cite: 130]. The keyword 'or' passes when either or both of the individual tests pass[cite: 131].", 
+                "The keyword 'and' checks if two conditions are both True simultaneously. The keyword 'or' passes when either or both of the individual tests pass.", 
                 `age_0 = 22
 age_1 = 18
 
@@ -189,11 +203,11 @@ print(f"Cleaned Username: '{clean_input}'")`
         g: "Data types", 
         id: "lists", 
         t: "Lists", 
-        lead: "A list is a dynamic, ordered collection of items[cite: 74, 75]. In Python, lists are incredibly flexible, indicated by square brackets, and allow you to store and manipulate collections of data efficiently[cite: 75].",
+        lead: "A list is a dynamic, ordered collection of items. In Python, lists are incredibly flexible, indicated by square brackets, and allow you to store and manipulate collections of data efficiently.",
         s: [
             [
                 "Under the Hood: Zero-Indexing & Access", 
-                "Python lists are zero-indexed, meaning the first item is at position 0, which stems from how list operations are implemented at a lower level in memory[cite: 76]. Python also provides negative indexing, where -1 accesses the very last element, acting as a dynamic pointer regardless of the list's total length[cite: 76, 88].", 
+                "Python lists are zero-indexed, meaning the first item is at position 0, which stems from how list operations are implemented at a lower level in memory. Python also provides negative indexing, where -1 accesses the very last element, acting as a dynamic pointer regardless of the list's total length.", 
                 `bicycles = ['trek', 'cannondale', 'redline']
 
 # Zero-indexed access
@@ -204,7 +218,7 @@ print(f"Last item: {bicycles[-1]}")`
             ],
             [
                 "Common Pitfalls: IndexErrors & Assignment Copies", 
-                "A frequent beginner mistake is the 'off-by-one' IndexError, caused by requesting the Nth item using index N instead of N-1[cite: 87, 88]. Another major pitfall is copying lists by standard assignment (list2 = list1)[cite: 105]. This merely creates two variable labels pointing to the same memory location, so changes to one affect the other[cite: 105]. Always use slicing ([:]) to create true independent copies[cite: 104].", 
+                "A frequent beginner mistake is the 'off-by-one' IndexError, caused by requesting the Nth item using index N instead of N-1. Another major pitfall is copying lists by standard assignment (list2 = list1). This merely creates two variable labels pointing to the same memory location, so changes to one affect the other. Always use slicing ([:]) to create true independent copies.", 
                 `my_foods = ['pizza', 'falafel']
 
 # INCORRECT COPY: Both point to the exact same memory!
@@ -219,7 +233,7 @@ print(f"Friend's foods (unaffected): {friend_foods}")`
             ],
             [
                 "Best Practices: Modification & Comprehensions", 
-                "Lists are dynamic structures[cite: 77]. Use append() to add elements efficiently to the end[cite: 78], and pop() to simultaneously remove and use an item[cite: 80]. When generating lists programmatically, always prefer 'List Comprehensions'[cite: 100]. They combine a for-loop and element creation into a single, highly optimized line of code[cite: 100, 101].", 
+                "Lists are dynamic structures. Use append() to add elements efficiently to the end, and pop() to simultaneously remove and use an item. When generating lists programmatically, always prefer 'List Comprehensions'. They combine a for-loop and element creation into a single, highly optimized line of code.", 
                 `# Dynamic modification
 stack = ['a', 'b']
 stack.append('c')
@@ -238,11 +252,11 @@ print(f"Optimized Squares: {squares}")`
         g: "Data types", 
         id: "tuples-sets", 
         t: "Tuples & Sets", 
-        lead: "Tuples are immutable lists, useful for data that shouldn't change[cite: 106]. Sets are collections of unique items, ideal for removing duplicates and performing mathematical set operations[cite: 145].",
+        lead: "Tuples are immutable lists, useful for data that shouldn't change. Sets are collections of unique items, ideal for removing duplicates and performing mathematical set operations.",
         s: [
             [
                 "Under the Hood: Immutability & Uniqueness", 
-                "A tuple looks just like a list but uses parentheses[cite: 107]. Its core feature is immutability—once defined, its elements cannot be altered[cite: 106]. Sets, on the other hand, are wrapped in braces like dictionaries but lack key-value pairs[cite: 146]. Sets automatically filter out duplicate data and do not retain items in any specific order[cite: 145, 146].", 
+                "A tuple looks just like a list but uses parentheses. Its core feature is immutability—once defined, its elements cannot be altered. Sets, on the other hand, are wrapped in braces like dictionaries but lack key-value pairs. Sets automatically filter out duplicate data and do not retain items in any specific order.", 
                 `# Tuple: Fixed coordinates
 dimensions = (200, 50)
 print(f"Tuple: {dimensions}")
@@ -253,7 +267,7 @@ print(f"Set (duplicates removed): {languages}")`
             ],
             [
                 "Common Pitfalls: TypeErrors & Empty Sets", 
-                "Trying to modify an item inside a tuple will immediately crash your program with a TypeError[cite: 107]. For sets, a major pitfall is trying to create an empty set using empty braces '{}'. Python interprets '{}' as an empty dictionary, not a set[cite: 135]. You must use 'set()' to create an empty set.", 
+                "Trying to modify an item inside a tuple will immediately crash your program with a TypeError. For sets, a major pitfall is trying to create an empty set using empty braces '{}'. Python interprets '{}' as an empty dictionary, not a set. You must use 'set()' to create an empty set.", 
                 `dimensions = (200, 50)
 
 # INCORRECT (Will cause TypeError):
@@ -268,7 +282,7 @@ print(f"Empty set type: {type(empty_set).__name__}")`
             ],
             [
                 "Best Practices: Fast Deduplication", 
-                "Use tuples when you want to store a set of values that should absolutely not be changed throughout the life of a program[cite: 108]. Use sets to instantly pull out unique items from a massive list with 'set(my_list)'[cite: 145]. Sets are highly optimized for membership testing (checking if an item exists) compared to lists.", 
+                "Use tuples when you want to store a set of values that should absolutely not be changed throughout the life of a program. Use sets to instantly pull out unique items from a massive list with 'set(my_list)'. Sets are highly optimized for membership testing (checking if an item exists) compared to lists.", 
                 `poll_responses = ['python', 'c', 'python', 'ruby', 'c']
 
 # BEST PRACTICE: Fast deduplication using set()
@@ -283,11 +297,11 @@ print(f"Unique Set: {unique_responses}")`
         g: "Data types", 
         id: "dicts", 
         t: "Dictionaries", 
-        lead: "A dictionary is a dynamic collection of key-value pairs wrapped in braces[cite: 133]. It allows you to connect related pieces of information and access them rapidly using their keys[cite: 132, 133].",
+        lead: "A dictionary is a dynamic collection of key-value pairs wrapped in braces. It allows you to connect related pieces of information and access them rapidly using their keys.",
         s: [
             [
                 "Under the Hood: Key-Value Mapping & Order", 
-                "Every key is connected to its value by a colon, and you use the key to fetch the value[cite: 133]. A key's value can be a string, a number, a list, or even another dictionary[cite: 133]. As of Python 3.7, dictionaries retain the exact order in which elements were added[cite: 135].", 
+                "Every key is connected to its value by a colon, and you use the key to fetch the value. A key's value can be a string, a number, a list, or even another dictionary. As of Python 3.7, dictionaries retain the exact order in which elements were added.", 
                 `alien = {'color': 'green', 'points': 5}
 
 # Accessing values via keys
@@ -300,7 +314,7 @@ print(f"Updated Dict: {alien}")`
             ],
             [
                 "Common Pitfalls: The dreaded KeyError", 
-                "The most common mistake with dictionaries is asking for a key that does not exist. Using standard bracket notation (e.g., dict['missing_key']) for a non-existent key results in a fatal KeyError traceback[cite: 139].", 
+                "The most common mistake with dictionaries is asking for a key that does not exist. Using standard bracket notation (e.g., dict['missing_key']) for a non-existent key results in a fatal KeyError traceback.", 
                 `alien = {'color': 'green'}
 
 # INCORRECT (Will cause KeyError):
@@ -314,7 +328,7 @@ else:
             ],
             [
                 "Best Practices: The get() Method & Looping", 
-                "To safely access values without risk of KeyErrors, always use the get() method, which returns a clean default value if the key doesn't exist[cite: 139]. When analyzing data, use .items() to loop through keys and values simultaneously, .keys() for just keys, and .values() for just values[cite: 140, 141, 144].", 
+                "To safely access values without risk of KeyErrors, always use the get() method, which returns a clean default value if the key doesn't exist. When analyzing data, use .items() to loop through keys and values simultaneously, .keys() for just keys, and .values() for just values.", 
                 `alien = {'color': 'green'}
 
 # BEST PRACTICE: Using get() with a fallback value
@@ -332,11 +346,11 @@ for key, value in user.items():
         g: "Control flow", 
         id: "conditions", 
         t: "Conditionals (if-elif-else)", 
-        lead: "Python's if statement allows you to examine the current state of a program and respond appropriately[cite: 112]. It evaluates Boolean expressions (True/False) to direct the execution flow[cite: 113, 118].",
+        lead: "Python's if statement allows you to examine the current state of a program and respond appropriately. It evaluates Boolean expressions (True/False) to direct the execution flow.",
         s: [
             [
                 "Under the Hood: Boolean Evaluation", 
-                "At the heart of every if statement is an expression evaluated as True or False (a conditional test)[cite: 113]. Python executes the indented code block following the statement only if the test passes (evaluates to True)[cite: 113, 120]. As soon as Python finds one test that passes in an if-elif-else chain, it skips the rest of the tests[cite: 121, 124].", 
+                "At the heart of every if statement is an expression evaluated as True or False (a conditional test). Python executes the indented code block following the statement only if the test passes (evaluates to True). As soon as Python finds one test that passes in an if-elif-else chain, it skips the rest of the tests.", 
                 `age = 19
 # Python evaluates the expression (age >= 18) as True
 if age >= 18:
@@ -344,7 +358,7 @@ if age >= 18:
             ],
             [
                 "Common Pitfalls: Catchall 'else' block vulnerabilities", 
-                "The 'else' block is a catchall statement that matches any condition not caught by preceding tests[cite: 124]. A major pitfall is that it can sometimes catch invalid or malicious data[cite: 124]. It is often safer to omit the 'else' block and use a specific 'elif' statement to catch the exact final condition you expect[cite: 124].", 
+                "The 'else' block is a catchall statement that matches any condition not caught by preceding tests. A major pitfall is that it can sometimes catch invalid or malicious data. It is often safer to omit the 'else' block and use a specific 'elif' statement to catch the exact final condition you expect.", 
                 `age = 65
 
 # INCORRECT (Catchall might accept invalid negative ages):
@@ -356,11 +370,11 @@ if age < 18:
     price = 25
 elif age >= 18:
     price = 20
-print(f"Price: ${price}")`
+print(f"Price: \\$\\{price}")`
             ],
             [
                 "Best Practices: Independent 'if' vs 'if-elif'", 
-                "If you want only one block of code to run, use an if-elif-else chain[cite: 125]. However, if more than one condition could be True, and you want to act on every true condition (like adding multiple requested toppings to a pizza), you must use a series of independent 'if' statements without 'elif' or 'else' blocks[cite: 124, 125].", 
+                "If you want only one block of code to run, use an if-elif-else chain. However, if more than one condition could be True, and you want to act on every true condition (like adding multiple requested toppings to a pizza), you must use a series of independent 'if' statements without 'elif' or 'else' blocks.", 
                 `requested_toppings = ['mushrooms', 'extra cheese']
 
 # BEST PRACTICE: Independent 'if' statements for multiple valid conditions
@@ -375,11 +389,11 @@ if 'extra cheese' in requested_toppings:
         g: "Control flow", 
         id: "loops", 
         t: "Loops (for & while)", 
-        lead: "Loops automate repetitive tasks. A 'for' loop executes a block of code once for each item in a collection[cite: 90, 118], while a 'while' loop runs as long as a certain condition remains true[cite: 112, 118].",
+        lead: "Loops automate repetitive tasks. A 'for' loop executes a block of code once for each item in a collection, while a 'while' loop runs as long as a certain condition remains true.",
         s: [
             [
                 "Under the Hood: Flags & Iteration", 
-                "A 'while' loop continually reevaluates its condition before each pass[cite: 119]. For complex programs like games, evaluating many conditions in one while statement becomes difficult[cite: 161]. Instead, programs use a Boolean variable called a 'flag' to act as a master signal[cite: 161]. The while loop simply checks this flag, leaving the complex logic inside the loop[cite: 161, 162].", 
+                "A 'while' loop continually reevaluates its condition before each pass. For complex programs like games, evaluating many conditions in one while statement becomes difficult. Instead, programs use a Boolean variable called a 'flag' to act as a master signal. The while loop simply checks this flag, leaving the complex logic inside the loop.", 
                 `# Using a flag to control loop execution
 active = True
 count = 0
@@ -392,7 +406,7 @@ print(f"Loop ran {count} times.")`
             ],
             [
                 "Common Pitfalls: Infinite Loops & Indentation", 
-                "Accidentally omitting the increment step (e.g., x += 1) in a while loop will cause an infinite loop that runs forever and crashes your program[cite: 163, 164]. In 'for' loops, logical errors frequently occur due to improper indentation—indenting code unnecessarily after the loop causes it to repeat, while forgetting to indent code causes it to execute only once[cite: 95, 96].", 
+                "Accidentally omitting the increment step (e.g., x += 1) in a while loop will cause an infinite loop that runs forever and crashes your program. In 'for' loops, logical errors frequently occur due to improper indentation—indenting code unnecessarily after the loop causes it to repeat, while forgetting to indent code causes it to execute only once.", 
                 `# INCORRECT (Infinite loop):
 # x = 1
 # while x <= 5: print(x)
@@ -405,7 +419,7 @@ while x <= 3:
             ],
             [
                 "Best Practices: break & continue", 
-                "To control loop flow efficiently without running unnecessary code, use the 'break' and 'continue' statements[cite: 162, 163]. 'break' instantly exits the loop entirely regardless of conditional tests[cite: 162], whereas 'continue' ignores the rest of the current loop iteration and immediately returns to the beginning to reevaluate the condition[cite: 163].", 
+                "To control loop flow efficiently without running unnecessary code, use the 'break' and 'continue' statements. 'break' instantly exits the loop entirely regardless of conditional tests, whereas 'continue' ignores the rest of the current loop iteration and immediately returns to the beginning to reevaluate the condition.", 
                 `# Using continue to print only odd numbers
 current_number = 0
 while current_number < 5:
