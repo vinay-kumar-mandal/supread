@@ -80,12 +80,10 @@ body {
     text-decoration: none
 }
 
-.logo {
-    background: var(--accent);
-    color: var(--bg);
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 15px
+.official-logo {
+    height: 28px;
+    width: auto;
+    display: block;
 }
 
 #search {

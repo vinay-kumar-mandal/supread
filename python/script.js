@@ -677,7 +677,7 @@ $("#menuBtn").onclick = () => side.classList.toggle("open");
 addEventListener("hashchange", render);
 
 // theme: light -> dark -> eye
-const themes = [["light", "☀ Light"], ["dark", "🌙 Dark"], ["eye", "👁 Eye care"]];
+const themes = [["light", "☀ Light"], ["dark", "🔆 Dark"], ["eye", "👁 Eye care"]];
 function setTheme(t) {
     document.documentElement.dataset.theme = t;
     $("#themeBtn").textContent = themes.find(x => x[0] === t)[1];
