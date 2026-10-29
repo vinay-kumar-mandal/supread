@@ -423,20 +423,193 @@ for i in range(1, 10):
         ]
     },
     {
-        g: "Functions & OOP", id: "functions", t: "Functions", lead: "Reusable blocks defined with <code>def</code>.",
-        s: [["Defaults and *args", "", `def greet(name, greeting="Hello"):\n    return f"{greeting}, {name}!"\n\ndef total(*nums):\n    return sum(nums)\n\nprint(greet("Vinay"))\nprint(total(1, 2, 3))\nprint((lambda x: x * 2)(5))`]]
+        g: "Functions & OOP", 
+        id: "functions", 
+        t: "Functions", 
+        lead: "Functions are reusable blocks of code designed to do one specific job. Defined with the 'def' keyword, they allow you to pass data in and return results, making your code modular.",
+        s: [
+            [
+                "Under the Hood: Scope & Argument Packing", 
+                "When a function executes, Python creates a temporary local namespace. Variables defined inside cannot be accessed outside. Python also allows dynamic argument handling using *args (which packs extra positional arguments into a tuple) and **kwargs (which packs keyword arguments into a dictionary).", 
+                `def build_profile(first, last, **kwargs):
+    # kwargs becomes a dictionary under the hood
+    kwargs['first_name'] = first
+    kwargs['last_name'] = last
+    return kwargs
+
+user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
+print(user_profile)`
+            ],
+            [
+                "Common Pitfalls: Mutable Default Arguments", 
+                "A dangerous pitfall is using a mutable object (like an empty list '[]' or dict '{}') as a default argument. Python evaluates default arguments only ONCE when the function is defined, not every time it's called. This means the same list is shared across all function calls.", 
+                `# INCORRECT (Shared list across calls):
+# def add_item(item, box=[]):
+
+# CORRECT (Using None as a placeholder):
+def add_item(item, box=None):
+    if box is None:
+        box = []
+    box.append(item)
+    return box
+
+print(add_item("Apple"))
+print(add_item("Banana")) # Fresh list created`
+            ],
+            [
+                "Best Practices: Return Values & Docstrings", 
+                "Functions should process data and 'return' a value rather than printing directly. This makes them reusable in different contexts. Always include a Docstring (triple quotes) right after the definition to explain what the function does.", 
+                `def get_formatted_name(first_name, last_name):
+    """Return a full name, neatly formatted."""
+    full_name = f"{first_name} {last_name}"
+    return full_name.title()
+
+musician = get_formatted_name('jimi', 'hendrix')
+print(f"Musician: {musician}")`
+            ]
+        ]
     },
     {
-        g: "Functions & OOP", id: "classes", t: "Classes", lead: "Bundle data and behavior.",
-        s: [["Example", "<code>__init__</code> runs on creation; <code>self</code> is the instance.", `class Dog:\n    def __init__(self, name):\n        self.name = name\n    def speak(self):\n        return f"{self.name} says woof"\n\nclass Puppy(Dog):\n    def speak(self):\n        return super().speak() + " (squeaky)"\n\nprint(Puppy("Rex").speak())`]]
+        g: "Functions & OOP", 
+        id: "classes", 
+        t: "Classes & OOP", 
+        lead: "Object-Oriented Programming (OOP) allows you to represent real-world situations. A class is a blueprint, and the object created from it is an 'instance'.",
+        s: [
+            [
+                "Under the Hood: Instantiation & The 'self' Parameter", 
+                "When you create an instance, Python automatically runs the special '__init__()' method to set up initial attributes. The 'self' parameter is mandatory in all methods; it is a reference to the specific instance itself, allowing Python to know which object's data to access or modify.", 
+                `class Dog:
+    def __init__(self, name, age):
+        """Initialize name and age attributes."""
+        self.name = name  # Instance attribute
+        self.age = age
+
+    def sit(self):
+        print(f"{self.name} is now sitting.")
+
+my_dog = Dog('Willie', 6)
+my_dog.sit()`
+            ],
+            [
+                "Common Pitfalls: Forgetting super() in Inheritance", 
+                "When creating a child class (inheritance), you must initialize the parent class's attributes. Forgetting to call 'super().__init__()' inside the child's '__init__' method will break the object and lead to missing attribute errors.", 
+                `class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+class ElectricCar(Car):
+    def __init__(self, make, model, battery_size=75):
+        # CORRECT: Initialize parent attributes
+        super().__init__(make, model)
+        self.battery_size = battery_size
+
+my_tesla = ElectricCar('tesla', 'model s')
+print(f"My {my_tesla.make} has a {my_tesla.battery_size}kWh battery.")`
+            ],
+            [
+                "Best Practices: Encapsulation", 
+                "Avoid modifying an object's attributes directly from outside the class (e.g., 'my_car.odometer = 50'). Instead, create specific methods (getters/setters) to update values safely. This protects the internal data logic.", 
+                `class User:
+    def __init__(self, name):
+        self.name = name
+        self.login_attempts = 0
+        
+    def increment_login_attempts(self):
+        """Safely update the attribute."""
+        self.login_attempts += 1
+
+user = User('alice')
+user.increment_login_attempts()
+print(f"Logins: {user.login_attempts}")`
+            ]
+        ]
     },
     {
-        g: "Advanced", id: "errors", t: "Exceptions", lead: "Handle runtime errors with <code>try</code>/<code>except</code>.",
-        s: [["Example", "<code>finally</code> always runs.", `try:\n    print(10 / 0)\nexcept ZeroDivisionError as e:\n    print("Error:", e)\nfinally:\n    print("done")`]]
+        g: "Advanced", 
+        id: "errors", 
+        t: "Exceptions (Error Handling)", 
+        lead: "Python uses special objects called exceptions to manage runtime errors. Using try-except blocks allows your program to handle unexpected situations gracefully instead of crashing entirely.",
+        s: [
+            [
+                "Under the Hood: The Exception Stack", 
+                "When Python encounters an error, it creates an exception object. If you don't catch it, it bubbles up the call stack, stops the program, and prints a traceback. By wrapping code in a 'try' block, you intercept this object before it crashes the system.", 
+                `print("Give me two numbers to divide.")
+
+try:
+    answer = 10 / 0
+except ZeroDivisionError:
+    print("Error: You can't divide by zero!")`
+            ],
+            [
+                "Common Pitfalls: Bare Except Clauses", 
+                "Using a 'bare except' (just 'except:') catches EVERYTHING, including SystemExit (when you try to close the app) or KeyboardInterrupt (Ctrl+C). This hides real bugs. Always specify the exact error you are anticipating, like FileNotFoundError.", 
+                `filename = 'alice.txt'
+
+# CORRECT: Catching a specific error
+try:
+    with open(filename, encoding='utf-8') as f:
+        contents = f.read()
+except FileNotFoundError:
+    print(f"Sorry, the file {filename} does not exist.")`
+            ],
+            [
+                "Best Practices: else & finally Blocks", 
+                "Use the 'else' block for code that should run ONLY if the try block was successful. Use the 'finally' block for teardown operations (like closing network connections), because 'finally' is guaranteed to run whether an exception occurred or not.", 
+                `try:
+    result = 10 / 2
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+else:
+    # Runs only if no error occurred
+    print(f"Division successful: {result}")
+finally:
+    # Always runs
+    print("Execution complete. Cleaning up...")`
+            ]
+        ]
     },
     {
-        g: "Advanced", id: "modules", t: "Modules & Imports", lead: "Reuse code from the standard library and packages.",
-        s: [["Example", "Install third-party packages with <code>pip install name</code>.", `import math, random\nfrom datetime import date\nprint(math.sqrt(16), math.pi)\nprint(random.randint(1, 6))\nprint(date.today().year)`]]
+        g: "Advanced", 
+        id: "modules", 
+        t: "Modules & Imports", 
+        lead: "Modules allow you to organize your code into separate files. You can import Python's standard library, third-party packages installed via pip, or your own custom files.",
+        s: [
+            [
+                "Under the Hood: sys.path & Compilation", 
+                "When you import a module, Python searches through a list of directories defined in 'sys.path'. To speed up future imports, it compiles the script into bytecode (.pyc files) and stores them in a hidden '__pycache__' directory.", 
+                `import sys
+import math
+
+print(f"Pi is {math.pi}")
+# Looking at the first search path
+print(f"Python looks here first: {sys.path[0]}")`
+            ],
+            [
+                "Common Pitfalls: Namespace Pollution", 
+                "Using wildcard imports (from module import *) is dangerous. It dumps every function and variable from the module into your current file's namespace. This can silently overwrite your own variables if they share the same name.", 
+                `# INCORRECT (Pollutes namespace):
+# from math import *
+
+# CORRECT (Explicit imports):
+from math import sqrt, pow
+
+# Using the explicitly imported functions
+print(sqrt(16))`
+            ],
+            [
+                "Best Practices: Aliasing", 
+                "If an imported function or module name is too long, or conflicts with an existing variable in your code, use the 'as' keyword to give it a short, clear alias. This keeps your code readable.", 
+                `# BEST PRACTICE: Module aliasing
+import random as rnd
+
+# Function aliasing
+from datetime import datetime as dt
+
+print(f"Random number: {rnd.randint(1, 100)}")
+print(f"Current Year: {dt.now().year}")`
+            ]
+        ]
     }
 ];
 const $ = s => document.querySelector(s);
