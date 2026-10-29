@@ -235,12 +235,98 @@ print(f"Optimized Squares: {squares}")`
         ]
     },
     {
-        g: "Data types", id: "tuples-sets", t: "Tuples & Sets", lead: "Tuples are immutable; sets hold unique values.",
-        s: [["Examples", "", `pt = (3, 4)\nx, y = pt\nprint(x, y)\nunique = set([1, 2, 2, 3])\nprint(unique, unique | {9})`]]
+        g: "Data types", 
+        id: "tuples-sets", 
+        t: "Tuples & Sets", 
+        lead: "Tuples are immutable lists, useful for data that shouldn't change[cite: 106]. Sets are collections of unique items, ideal for removing duplicates and performing mathematical set operations[cite: 145].",
+        s: [
+            [
+                "Under the Hood: Immutability & Uniqueness", 
+                "A tuple looks just like a list but uses parentheses[cite: 107]. Its core feature is immutability—once defined, its elements cannot be altered[cite: 106]. Sets, on the other hand, are wrapped in braces like dictionaries but lack key-value pairs[cite: 146]. Sets automatically filter out duplicate data and do not retain items in any specific order[cite: 145, 146].", 
+                `# Tuple: Fixed coordinates
+dimensions = (200, 50)
+print(f"Tuple: {dimensions}")
+
+# Set: Unique items only
+languages = {'python', 'ruby', 'python', 'c'}
+print(f"Set (duplicates removed): {languages}")`
+            ],
+            [
+                "Common Pitfalls: TypeErrors & Empty Sets", 
+                "Trying to modify an item inside a tuple will immediately crash your program with a TypeError[cite: 107]. For sets, a major pitfall is trying to create an empty set using empty braces '{}'. Python interprets '{}' as an empty dictionary, not a set[cite: 135]. You must use 'set()' to create an empty set.", 
+                `dimensions = (200, 50)
+
+# INCORRECT (Will cause TypeError):
+# dimensions[0] = 250 
+
+# CORRECT: Redefining the entire tuple is allowed
+dimensions = (400, 100)
+
+# Creating an empty set safely
+empty_set = set()
+print(f"Empty set type: {type(empty_set).__name__}")`
+            ],
+            [
+                "Best Practices: Fast Deduplication", 
+                "Use tuples when you want to store a set of values that should absolutely not be changed throughout the life of a program[cite: 108]. Use sets to instantly pull out unique items from a massive list with 'set(my_list)'[cite: 145]. Sets are highly optimized for membership testing (checking if an item exists) compared to lists.", 
+                `poll_responses = ['python', 'c', 'python', 'ruby', 'c']
+
+# BEST PRACTICE: Fast deduplication using set()
+unique_responses = set(poll_responses)
+
+print(f"Original List: {poll_responses}")
+print(f"Unique Set: {unique_responses}")`
+            ]
+        ]
     },
     {
-        g: "Data types", id: "dicts", t: "Dictionaries", lead: "Key–value mappings.",
-        s: [["Basic use", "Use <code>.get()</code> to avoid <code>KeyError</code>.", `user = {"name": "Vinay", "lang": "Python"}\nuser["age"] = 21\nprint(user.get("city", "unknown"))\nfor k, v in user.items():\n    print(k, "=", v)`]]
+        g: "Data types", 
+        id: "dicts", 
+        t: "Dictionaries", 
+        lead: "A dictionary is a dynamic collection of key-value pairs wrapped in braces[cite: 133]. It allows you to connect related pieces of information and access them rapidly using their keys[cite: 132, 133].",
+        s: [
+            [
+                "Under the Hood: Key-Value Mapping & Order", 
+                "Every key is connected to its value by a colon, and you use the key to fetch the value[cite: 133]. A key's value can be a string, a number, a list, or even another dictionary[cite: 133]. As of Python 3.7, dictionaries retain the exact order in which elements were added[cite: 135].", 
+                `alien = {'color': 'green', 'points': 5}
+
+# Accessing values via keys
+alien_color = alien['color']
+print(f"Alien color is {alien_color}")
+
+# Adding new key-value pairs dynamically
+alien['x_position'] = 0
+print(f"Updated Dict: {alien}")`
+            ],
+            [
+                "Common Pitfalls: The dreaded KeyError", 
+                "The most common mistake with dictionaries is asking for a key that does not exist. Using standard bracket notation (e.g., dict['missing_key']) for a non-existent key results in a fatal KeyError traceback[cite: 139].", 
+                `alien = {'color': 'green'}
+
+# INCORRECT (Will cause KeyError):
+# print(alien['points'])
+
+# CORRECT (Using 'in' keyword to check first)
+if 'points' in alien:
+    print(alien['points'])
+else:
+    print("Points key not found!")`
+            ],
+            [
+                "Best Practices: The get() Method & Looping", 
+                "To safely access values without risk of KeyErrors, always use the get() method, which returns a clean default value if the key doesn't exist[cite: 139]. When analyzing data, use .items() to loop through keys and values simultaneously, .keys() for just keys, and .values() for just values[cite: 140, 141, 144].", 
+                `alien = {'color': 'green'}
+
+# BEST PRACTICE: Using get() with a fallback value
+points = alien.get('points', 'No points assigned')
+print(f"Safe fetch: {points}")
+
+# BEST PRACTICE: Looping through key-value pairs
+user = {'username': 'efermi', 'first': 'enrico'}
+for key, value in user.items():
+    print(f"Key: {key} | Value: {value}")`
+            ]
+        ]
     },
     {
         g: "Control flow", id: "conditions", t: "Conditionals", lead: "Branch with <code>if</code>, <code>elif</code>, <code>else</code>.",
