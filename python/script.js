@@ -717,3 +717,27 @@ code.addEventListener("keydown", e => {
     if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); run() }
 });
 buildNav(); render();
+
+// --- Toggle Editor Logic ---
+const editorBtn = $("#editorBtn");
+function setEditorState(hide) {
+    document.body.classList.toggle("hide-editor", hide);
+    // Button का लुक थोड़ा चेंज करने के लिए (Optional)
+    if(hide) {
+        editorBtn.style.opacity = "0.5";
+    } else {
+        editorBtn.style.opacity = "1";
+    }
+    // सेटिंग को लोकल स्टोरेज में सेव करें
+    try { localStorage.setItem("pydocs-editor", hide ? "hidden" : "visible") } catch (e) { }
+}
+
+editorBtn.onclick = () => {
+    const isHidden = document.body.classList.contains("hide-editor");
+    setEditorState(!isHidden);
+};
+
+// पेज लोड होने पर पुरानी सेटिंग चेक करें
+let savedEditor = false;
+try { savedEditor = localStorage.getItem("pydocs-editor") === "hidden" } catch (e) { }
+setEditorState(savedEditor);
