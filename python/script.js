@@ -658,6 +658,12 @@ function render() {
         h += `<h2>${title}</h2>${txt ? `<p>${txt}</p>` : ""}<div class="ex"><div class="ex-head"><span>Python</span><button data-run="${i}-${n}">Try it</button></div><pre><code>${esc(c)}</code></pre></div>`;
     });
     h += `<div class="pager">${i > 0 ? `<a href="#${T[i - 1].id}">← ${T[i - 1].t}</a>` : "<span></span>"}${i < T.length - 1 ? `<a href="#${T[i + 1].id}">${T[i + 1].t} →</a>` : "<span></span>"}</div>`;
+    
+    // --- Naya: Automatic Last Update Date ---
+    const dateObj = new Date(document.lastModified);
+    const formattedDate = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY format banata hai
+    h += `<div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted);">Last update at ${formattedDate}</div>`;
+    
     content.innerHTML = h; content.scrollIntoView(); window.scrollTo(0, 0);
     code.value = x.s[0][2]; mark(); side.classList.remove("open");
     document.title = x.t + " – Python Docs";
