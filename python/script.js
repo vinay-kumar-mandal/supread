@@ -329,13 +329,98 @@ for key, value in user.items():
         ]
     },
     {
-        g: "Control flow", id: "conditions", t: "Conditionals", lead: "Branch with <code>if</code>, <code>elif</code>, <code>else</code>.",
-        s: [["Example", "", `score = 72\nif score >= 90:\n    print("A")\nelif score >= 60:\n    print("B")\nelse:\n    print("C")`]]
+        g: "Control flow", 
+        id: "conditions", 
+        t: "Conditionals (if-elif-else)", 
+        lead: "Python's if statement allows you to examine the current state of a program and respond appropriately[cite: 112]. It evaluates Boolean expressions (True/False) to direct the execution flow[cite: 113, 118].",
+        s: [
+            [
+                "Under the Hood: Boolean Evaluation", 
+                "At the heart of every if statement is an expression evaluated as True or False (a conditional test)[cite: 113]. Python executes the indented code block following the statement only if the test passes (evaluates to True)[cite: 113, 120]. As soon as Python finds one test that passes in an if-elif-else chain, it skips the rest of the tests[cite: 121, 124].", 
+                `age = 19
+# Python evaluates the expression (age >= 18) as True
+if age >= 18:
+    print("You are old enough to vote!")`
+            ],
+            [
+                "Common Pitfalls: Catchall 'else' block vulnerabilities", 
+                "The 'else' block is a catchall statement that matches any condition not caught by preceding tests[cite: 124]. A major pitfall is that it can sometimes catch invalid or malicious data[cite: 124]. It is often safer to omit the 'else' block and use a specific 'elif' statement to catch the exact final condition you expect[cite: 124].", 
+                `age = 65
+
+# INCORRECT (Catchall might accept invalid negative ages):
+# if age < 18: price = 25
+# else: price = 20
+
+# CORRECT: Testing the specific final condition
+if age < 18:
+    price = 25
+elif age >= 18:
+    price = 20
+print(f"Price: ${price}")`
+            ],
+            [
+                "Best Practices: Independent 'if' vs 'if-elif'", 
+                "If you want only one block of code to run, use an if-elif-else chain[cite: 125]. However, if more than one condition could be True, and you want to act on every true condition (like adding multiple requested toppings to a pizza), you must use a series of independent 'if' statements without 'elif' or 'else' blocks[cite: 124, 125].", 
+                `requested_toppings = ['mushrooms', 'extra cheese']
+
+# BEST PRACTICE: Independent 'if' statements for multiple valid conditions
+if 'mushrooms' in requested_toppings:
+    print("Adding mushrooms.")
+if 'extra cheese' in requested_toppings:
+    print("Adding extra cheese.")`
+            ]
+        ]
     },
     {
-        g: "Control flow", id: "loops", t: "Loops", lead: "Repeat with <code>for</code> and <code>while</code>.",
-        s: [["for and while", "Use <code>range()</code>, <code>break</code>, <code>continue</code>.", `for i in range(3):\n    print("for", i)\nn = 3\nwhile n > 0:\n    print("while", n)\n    n -= 1`],
-        ["Comprehensions", "Compact way to build lists.", `squares = [i * i for i in range(6) if i % 2 == 0]\nprint(squares)`]]
+        g: "Control flow", 
+        id: "loops", 
+        t: "Loops (for & while)", 
+        lead: "Loops automate repetitive tasks. A 'for' loop executes a block of code once for each item in a collection[cite: 90, 118], while a 'while' loop runs as long as a certain condition remains true[cite: 112, 118].",
+        s: [
+            [
+                "Under the Hood: Flags & Iteration", 
+                "A 'while' loop continually reevaluates its condition before each pass[cite: 119]. For complex programs like games, evaluating many conditions in one while statement becomes difficult[cite: 161]. Instead, programs use a Boolean variable called a 'flag' to act as a master signal[cite: 161]. The while loop simply checks this flag, leaving the complex logic inside the loop[cite: 161, 162].", 
+                `# Using a flag to control loop execution
+active = True
+count = 0
+
+while active:
+    count += 1
+    if count >= 3:
+        active = False  # The flag is switched, stopping the loop next pass
+print(f"Loop ran {count} times.")`
+            ],
+            [
+                "Common Pitfalls: Infinite Loops & Indentation", 
+                "Accidentally omitting the increment step (e.g., x += 1) in a while loop will cause an infinite loop that runs forever and crashes your program[cite: 163, 164]. In 'for' loops, logical errors frequently occur due to improper indentation—indenting code unnecessarily after the loop causes it to repeat, while forgetting to indent code causes it to execute only once[cite: 95, 96].", 
+                `# INCORRECT (Infinite loop):
+# x = 1
+# while x <= 5: print(x)
+
+# CORRECT: Always ensure a path to exit the loop
+x = 1
+while x <= 3:
+    print(f"Counter: {x}")
+    x += 1  # Crucial increment step`
+            ],
+            [
+                "Best Practices: break & continue", 
+                "To control loop flow efficiently without running unnecessary code, use the 'break' and 'continue' statements[cite: 162, 163]. 'break' instantly exits the loop entirely regardless of conditional tests[cite: 162], whereas 'continue' ignores the rest of the current loop iteration and immediately returns to the beginning to reevaluate the condition[cite: 163].", 
+                `# Using continue to print only odd numbers
+current_number = 0
+while current_number < 5:
+    current_number += 1
+    if current_number % 2 == 0:
+        continue # Skips the print statement for even numbers
+    print(current_number)
+
+# Using break to exit instantly
+for i in range(1, 10):
+    if i == 3:
+        break # Stops entirely at 3
+    print(f"Break demo: {i}")`
+            ]
+        ]
     },
     {
         g: "Functions & OOP", id: "functions", t: "Functions", lead: "Reusable blocks defined with <code>def</code>.",
