@@ -143,12 +143,96 @@ print(f"Is at least one person older than 21? {one_older_than_21}")`
         ]
     },
     {
-        g: "Data types", id: "strings", t: "Strings", lead: "Immutable sequences of characters.",
-        s: [["Common methods", "Strings support slicing and many methods.", `s = "  Python Docs  "\nprint(s.strip().upper())\nprint(s.strip()[0:6])\nprint("-".join(["a", "b", "c"]))\nprint("Python".replace("P", "J"))`]]
+        g: "Data types", 
+        id: "strings", 
+        t: "Strings", 
+        lead: "A string is a sequence of characters. In Python, anything inside single or double quotes is considered a string. They are immutable, meaning they cannot be changed after creation.",
+        s: [
+            [
+                "Under the Hood: Immutability", 
+                "Strings in Python are immutable. When you use methods like lower() or upper(), Python does not change the original string in memory. Instead, the interpreter creates an entirely new string object and returns it, while variables act merely as labels pointing to these objects.", 
+                `language = "Python"
+# This creates a NEW string object in memory
+uppercase_lang = language.upper()
+
+print(f"Original: {language}")
+print(f"Modified: {uppercase_lang}")`
+            ],
+            [
+                "Common Pitfalls: Syntax Errors with Quotes", 
+                "A frequent beginner mistake is using an apostrophe inside single quotes. The Python interpreter gets confused about where the string actually ends, resulting in a SyntaxError. Always use double quotes if your text contains apostrophes.", 
+                `# CORRECT: Using double quotes for strings with apostrophes
+message = "One of Python's strengths is its community."
+print(message)
+
+# INCORRECT (Will cause SyntaxError):
+# bad_message = 'One of Python's strengths...'`
+            ],
+            [
+                "Best Practices: f-strings & Whitespace Sanitization", 
+                "For combining variables and text, always use f-strings (introduced in Python 3.6) as they are cleaner and faster than old concatenation (+). When accepting user input, proactively use the strip() method to remove accidental whitespace from the left and right sides.", 
+                `# f-strings for clean variable injection
+first_name = "ada"
+last_name = "lovelace"
+full_name = f"{first_name} {last_name}"
+
+# Sanitizing input with strip()
+user_input = "   admin_user   "
+clean_input = user_input.strip()
+
+print(f"Welcome, {full_name.title()}!")
+print(f"Cleaned Username: '{clean_input}'")`
+            ]
+        ]
     },
     {
-        g: "Data types", id: "lists", t: "Lists", lead: "Ordered, mutable collections.",
-        s: [["Basic use", "Add with <code>append()</code>, remove with <code>pop()</code>, sort with <code>sorted()</code>.", `nums = [3, 1, 2]\nnums.append(4)\nprint(nums, len(nums))\nprint(sorted(nums, reverse=True))\nprint(nums[1:3])`]]
+        g: "Data types", 
+        id: "lists", 
+        t: "Lists", 
+        lead: "A list is a dynamic, ordered collection of items[cite: 74, 75]. In Python, lists are incredibly flexible, indicated by square brackets, and allow you to store and manipulate collections of data efficiently[cite: 75].",
+        s: [
+            [
+                "Under the Hood: Zero-Indexing & Access", 
+                "Python lists are zero-indexed, meaning the first item is at position 0, which stems from how list operations are implemented at a lower level in memory[cite: 76]. Python also provides negative indexing, where -1 accesses the very last element, acting as a dynamic pointer regardless of the list's total length[cite: 76, 88].", 
+                `bicycles = ['trek', 'cannondale', 'redline']
+
+# Zero-indexed access
+print(f"First item: {bicycles[0]}")
+
+# Negative indexing for dynamic tail access
+print(f"Last item: {bicycles[-1]}")`
+            ],
+            [
+                "Common Pitfalls: IndexErrors & Assignment Copies", 
+                "A frequent beginner mistake is the 'off-by-one' IndexError, caused by requesting the Nth item using index N instead of N-1[cite: 87, 88]. Another major pitfall is copying lists by standard assignment (list2 = list1)[cite: 105]. This merely creates two variable labels pointing to the same memory location, so changes to one affect the other[cite: 105]. Always use slicing ([:]) to create true independent copies[cite: 104].", 
+                `my_foods = ['pizza', 'falafel']
+
+# INCORRECT COPY: Both point to the exact same memory!
+# friend_foods = my_foods 
+
+# CORRECT COPY: Creates an independent copy using a slice
+friend_foods = my_foods[:]
+my_foods.append('cannoli')
+
+print(f"My foods: {my_foods}")
+print(f"Friend's foods (unaffected): {friend_foods}")`
+            ],
+            [
+                "Best Practices: Modification & Comprehensions", 
+                "Lists are dynamic structures[cite: 77]. Use append() to add elements efficiently to the end[cite: 78], and pop() to simultaneously remove and use an item[cite: 80]. When generating lists programmatically, always prefer 'List Comprehensions'[cite: 100]. They combine a for-loop and element creation into a single, highly optimized line of code[cite: 100, 101].", 
+                `# Dynamic modification
+stack = ['a', 'b']
+stack.append('c')
+last_item = stack.pop() # Removes and returns 'c'
+
+# BEST PRACTICE: List Comprehension
+# Generates squares of numbers 1 through 5 in one clean line
+squares = [val**2 for val in range(1, 6)]
+
+print(f"Stack after pop: {stack}")
+print(f"Optimized Squares: {squares}")`
+            ]
+        ]
     },
     {
         g: "Data types", id: "tuples-sets", t: "Tuples & Sets", lead: "Tuples are immutable; sets hold unique values.",
