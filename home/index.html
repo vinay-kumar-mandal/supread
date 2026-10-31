@@ -1,74 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supread Docs | Premium Developer Library</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuNova – The Ultimate Documentation Experience</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="relative min-h-screen overflow-x-hidden bg-ink font-sans text-white">
 
-    <!-- Navigation Bar -->
-    <nav id="navbar">
-        <div class="container nav-wrapper">
-            <a href="#" class="logo">
-                <img src="../asset/logo.png" alt="Supread" height="200">
-            </a>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Search documentation, syntax, or guides...">
-            </div>
+  <!-- Atmospheric background -->
+  <div class="bg-scene pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="rBlue" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#3b2bd9" stop-opacity="0"/>
+          <stop offset=".45" stop-color="#2f6bff"/>
+          <stop offset="1" stop-color="#5b8cff"/>
+        </linearGradient>
+        <linearGradient id="rPurple" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#5b21b6" stop-opacity="0"/>
+          <stop offset=".35" stop-color="#7c3aed"/>
+          <stop offset=".7" stop-color="#c026d3"/>
+          <stop offset="1" stop-color="#6366f1"/>
+        </linearGradient>
+        <linearGradient id="rOrange" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#a21caf" stop-opacity="0"/>
+          <stop offset=".3" stop-color="#e11d8f"/>
+          <stop offset=".65" stop-color="#fb5f4a"/>
+          <stop offset="1" stop-color="#ff9a2e"/>
+        </linearGradient>
+        <linearGradient id="rLine" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#6d28d9" stop-opacity="0"/>
+          <stop offset=".35" stop-color="#8b5cf6"/>
+          <stop offset=".7" stop-color="#d946ef"/>
+          <stop offset="1" stop-color="#fb923c"/>
+        </linearGradient>
+        <linearGradient id="rBottom" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#4c1d95" stop-opacity=".1"/>
+          <stop offset=".5" stop-color="#6d28d9" stop-opacity=".6"/>
+          <stop offset="1" stop-color="#f97316" stop-opacity=".8"/>
+        </linearGradient>
+        <filter id="b40" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2600" height="1900"><feGaussianBlur stdDeviation="40"/></filter>
+        <filter id="b22" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2600" height="1900"><feGaussianBlur stdDeviation="22"/></filter>
+        <filter id="b8" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2600" height="1900"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="b2" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2600" height="1900"><feGaussianBlur stdDeviation="2"/></filter>
+      </defs>
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#" class="nav-btn">Explore</a></li>
-                <li><a href="#" class="nav-btn">Community</a></li>
-                <li><a href="#" class="btn-primary">Sign In</a></li>
-            </ul>
-        </div>
+      <!-- blue glow top-right -->
+      <g class="drift d1">
+        <path d="M720 -80 C 880 10, 1020 120, 1340 40" stroke="url(#rBlue)" stroke-width="170" fill="none" stroke-linecap="round" filter="url(#b40)" opacity=".95"/>
+        <path d="M900 20 C 1030 80, 1170 60, 1300 110" stroke="#4f8bff" stroke-width="30" fill="none" filter="url(#b22)" opacity=".8"/>
+      </g>
+
+      <!-- purple / magenta silk -->
+      <g class="drift d2">
+        <path d="M500 780 C 640 560, 690 380, 800 270 C 890 180, 1010 150, 1140 70" stroke="url(#rPurple)" stroke-width="120" fill="none" stroke-linecap="round" filter="url(#b40)" opacity=".7"/>
+        <path d="M560 760 C 690 580, 730 400, 830 300 C 910 225, 1020 190, 1120 120" stroke="url(#rPurple)" stroke-width="46" fill="none" stroke-linecap="round" filter="url(#b8)" opacity=".8"/>
+        <path d="M590 740 C 710 590, 750 420, 850 330 C 930 255, 1030 215, 1130 150" stroke="#f0abfc" stroke-width="2.500" fill="none" filter="url(#b2)" opacity=".7"/>
+      </g>
+
+      <!-- orange silk -->
+      <g class="drift d3">
+        <path d="M760 700 C 880 560, 980 470, 1090 370 C 1170 295, 1230 230, 1330 160" stroke="url(#rOrange)" stroke-width="130" fill="none" stroke-linecap="round" filter="url(#b40)" opacity=".9"/>
+        <path d="M800 690 C 920 560, 1020 480, 1120 400 C 1190 340, 1240 290, 1320 230" stroke="url(#rOrange)" stroke-width="40" fill="none" stroke-linecap="round" filter="url(#b8)" opacity=".85"/>
+        <path d="M960 800 C 1070 680, 1180 590, 1330 500" stroke="#ff8a1f" stroke-width="150" fill="none" stroke-linecap="round" filter="url(#b40)" opacity=".6"/>
+        <path d="M850 700 C 980 600, 1050 520, 1130 450" stroke="#ffb05a" stroke-width="2.500" fill="none" filter="url(#b2)" opacity=".7"/>
+      </g>
+
+      <!-- bottom waves -->
+      <g class="drift d4">
+        <path d="M-60 600 C 220 500, 440 480, 640 530 S 1020 620, 1340 480 L1340 800 L-60 800 Z" fill="url(#rBottom)" opacity=".35" filter="url(#b22)"/>
+        <path d="M-40 585 C 240 500, 460 490, 650 535 S 1030 600, 1320 505" stroke="url(#rLine)" stroke-width="5" fill="none" filter="url(#b8)" opacity=".95"/>
+        <path d="M-40 585 C 240 500, 460 490, 650 535 S 1030 600, 1320 505" stroke="url(#rLine)" stroke-width="1.500" fill="none" opacity=".9"/>
+        <path d="M-40 625 C 260 548, 500 560, 720 560 S 1060 530, 1320 560" stroke="url(#rLine)" stroke-width="1.200" fill="none" opacity=".55"/>
+        <path d="M-40 665 C 280 600, 520 620, 760 598 S 1080 570, 1320 610" stroke="url(#rLine)" stroke-width="1" fill="none" opacity=".35"/>
+      </g>
+
+      <!-- left-bottom violet glow -->
+      <ellipse class="pulse" cx="170" cy="740" rx="420" ry="110" fill="#5b21b6" opacity=".4" filter="url(#b40)"/>
+    </svg>
+    <div class="vignette absolute inset-0"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="animate-fade-down relative z-10 flex h-[74px] items-center px-5 sm:pl-[58px] sm:pr-[46px]">
+    <a href="#" class="group flex items-center gap-3.5">
+      <span class="grid h-[46px] w-[42px] place-items-center bg-gradient-to-br from-purple-500 via-violet-600 to-fuchsia-600 drop-shadow-[0_0_14px_rgba(139,92,246,.8)] transition-transform duration-500 group-hover:rotate-[60deg]" style="clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)">
+        <svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v14"/></svg>
+      </span>
+      <span class="text-xl font-semibold">DocuNova</span>
+    </a>
+
+    <nav id="links" class="absolute left-4 right-4 top-[70px] hidden flex-col rounded-2xl border border-white/15 bg-[#0e0a20]/95 p-2 backdrop-blur-xl lg:static lg:ml-[120px] lg:flex lg:flex-row lg:gap-[46px] lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+      <a href="../DOC/index.html" class="nav-link py-3.5 pl-4 text-[13.5px] font-medium text-slate-200 transition-colors hover:text-white lg:px-0 lg:py-1.5">Docs</a>
+      <a href="#" class="nav-link py-3.5 pl-4 text-[13.5px] font-medium text-slate-200 transition-colors hover:text-white lg:px-0 lg:py-1.5">Tutorials</a>
+      <a href="#" class="nav-link py-3.5 pl-4 text-[13.5px] font-medium text-slate-200 transition-colors hover:text-white lg:px-0 lg:py-1.5">API</a>
+      <a href="#" class="nav-link py-3.5 pl-4 text-[13.5px] font-medium text-slate-200 transition-colors hover:text-white lg:px-0 lg:py-1.5">Changelog</a>
+      <a href="#" class="nav-link py-3.5 pl-4 text-[13.5px] font-medium text-slate-200 transition-colors hover:text-white lg:px-0 lg:py-1.5">Pricing</a>
     </nav>
 
-    <!-- Sliding Language Bar -->
-    <div class="lang-bar-container">
-        <div class="container">
-            <div class="lang-slider" id="langSlider">
-                
-                <button type="button" class="lang-item" onclick="window.location.href='../JavaScript/index.html'">JavaScript</button>
-                <a href="/html" class="lang-item">HTML</a>
-                <a href="/css" class="lang-item">CSS</a>
-                <button type="button" class="lang-item" onclick="window.location.href='../C++/index.html'">C++</button>
-                <button type="button" class="lang-item" onclick="window.location.href='../python/index.html'">Python</button>
-
-                <button type="button" class="lang-item" onclick="window.location.href='../C/index.html'">C</button>
-                <button type="button" class="lang-item" onclick="window.location.href='../C#/index.html'">C#</button>
-                <button type="button" class="lang-item" onclick="window.location.href='../java/index.html'">java</button
-                <a href="/typescript" class="lang-item">TypeScript</a>
-                <a href="/go" class="lang-item">Go</a>
-                <a href="/rust" class="lang-item">Rust</a>
-                <a href="/ruby" class="lang-item">Ruby</a>
-                <a href="/php" class="lang-item">PHP</a>
-                <a href="/sql" class="lang-item">SQL</a>
-                <a href="/mongodb" class="lang-item">MongoDB</a>
-                <a href="/react" class="lang-item">React</a>
-                <a href="/nodejs" class="lang-item">Node.js</a>
-            </div>
-        </div>
+    <div class="ml-auto flex items-center gap-3.5">
+      <label class="hidden h-10 w-[228px] cursor-text items-center gap-3 rounded-full border border-white/40 bg-[#060410]/55 px-[18px] backdrop-blur transition-all duration-300 hover:border-white/70 focus-within:w-[260px] focus-within:border-violet-400 focus-within:shadow-[0_0_0_3px_rgba(139,92,246,.28),0_0_24px_rgba(139,92,246,.35)] md:flex">
+        <svg class="h-[17px] w-[17px] flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="searchInput" type="text" placeholder="Search docs..." class="min-w-0 flex-1 bg-transparent text-xs text-white outline-none placeholder:text-slate-200" />
+        <kbd class="whitespace-nowrap font-sans text-[11.5px] text-slate-200">Ctrl + K</kbd>
+      </label>
+      <a href="#" class="shine group/btn hidden h-10 items-center gap-2 rounded-full bg-btn-grad px-5 text-xs font-semibold shadow-[0_6px_30px_rgba(124,58,237,.6),inset_0_1px_0_rgba(255,255,255,.3)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(139,92,246,.85)] sm:inline-flex">Get Started <svg class="w-[15px] h-[15px] transition-transform duration-300 group-hover/btn:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button id="burger" class="burger flex h-[34px] w-[34px] flex-col justify-center gap-[5px] lg:hidden" aria-label="Menu"><span class="block h-0.5 rounded bg-white transition-all duration-300"></span><span class="block h-0.5 rounded bg-white transition-all duration-300"></span><span class="block h-0.5 rounded bg-white transition-all duration-300"></span></button>
     </div>
+  </header>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container hero-content">
-            <span class="badge">Open Source Documentation</span>
-            <h1>The ultimate library for <br><span>Developers</span></h1>
-            <p>Access high-quality, premium documentation for all programming languages, frameworks, and databases in one place. Built for speed, clarity, and precision.</p>
-            
-            <div class="hero-buttons">
-                <a href="#" class="btn-primary large-btn">Start Reading</a>
-                <a href="#" class="btn-outline large-btn">Contribute on GitHub</a>
-            </div>
-        </div>
-    </header>
+  <!-- Hero -->
+  <main class="relative z-[5] grid grid-cols-1 items-start gap-12 px-5 pt-6 sm:px-[60px] sm:pt-[34px] lg:grid-cols-[1fr_440px] lg:gap-6 xl:grid-cols-[1fr_500px]">
+    <section class="hero-left">
+      <span class="animate-fade-up inline-flex h-[34px] items-center gap-2 rounded-full border border-indigo-300/50 bg-gradient-to-r from-[#1c1242]/95 to-[#1a348c]/95 px-[18px] text-[15px] font-medium shadow-[0_0_22px_rgba(70,110,255,.35),inset_0_0_12px_rgba(120,100,255,.15)]" style="animation-delay:.15s"><span class="text-purple-300">Learn.</span><span class="text-indigo-100">Build.</span><span class="text-indigo-100">Grow.</span></span>
+      <h1 class="animate-fade-up mt-[18px] text-[42px] font-bold leading-[44px] tracking-[-0.6px] md:text-[58px] md:leading-[52px] xl:whitespace-nowrap xl:text-[73px] xl:leading-[61px]" style="animation-delay:.3s">
+        The Ultimate<br />
+        <span class="animate-shimmer bg-doc-grad bg-[length:200%_100%] bg-clip-text text-transparent">Documentation</span><br />
+        Experience
+      </h1>
+      <p class="animate-fade-up mt-4 text-base leading-[25px] text-slate-200 sm:text-[19px]" style="animation-delay:.5s">Beautiful docs. Powerful features. Seamless workflow<br class="hidden sm:block" /> for developers and teams.</p>
+      <div class="animate-fade-up mt-5 flex flex-col gap-5 sm:flex-row sm:items-center" style="animation-delay:.65s">
+        <a href="#features" class="shine group/btn inline-flex h-[50px] items-center justify-center gap-2 rounded-full bg-btn-grad px-[30px] text-[14.5px] font-semibold shadow-[0_6px_30px_rgba(124,58,237,.6),inset_0_1px_0_rgba(255,255,255,.3)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(139,92,246,.85)]">Explore Features <svg class="w-[15px] h-[15px] transition-transform duration-300 group-hover/btn:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="group/btn inline-flex h-[50px] items-center justify-center gap-2.5 rounded-full border border-white/40 bg-[#04030b]/60 pl-[18px] pr-7 text-[14.5px] font-medium backdrop-blur transition-all duration-300 hover:border-white hover:bg-white/10 hover:shadow-[0_0_26px_rgba(255,255,255,.12)]">
+          <svg class="h-6 w-6 transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg>View Demo</a>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="-mt-2 flex justify-center [perspective:1200px] lg:justify-end">
+      <div class="cards grid grid-cols-1 gap-3 sm:grid-cols-[205px_232px] sm:gap-x-5">
+        <a href="#" class="gcard group relative block h-[152px] rounded-[22px] p-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] " style="animation-delay:.5s,1.4s">
+          <span class="mb-2 grid h-12 w-12 place-items-center rounded-xl border border-white/15 bg-indigo-500/20"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v14"/></svg></span>
+          <h3 class="text-lg font-semibold leading-tight">Guides</h3>
+          <p class="mt-1 pr-12 text-[13.5px] leading-[1.3] text-slate-300">Step-by-step<br />tutorials</p>
+          <span class="go absolute right-4 bottom-[18px] grid h-[34px] w-[34px] place-items-center rounded-full border border-white/25 bg-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:!bg-violet-600 group-hover:!border-transparent group-hover:shadow-[0_0_18px_rgba(124,58,237,.8)]"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="#" class="gcard group relative block h-[152px] rounded-[22px] p-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] top-2.5" style="animation-delay:.65s,2.2s">
+          <span class="mb-2 grid h-12 w-12 place-items-center rounded-xl border border-white/15 bg-violet-500/20"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+          <h3 class="text-lg font-semibold leading-tight">API Reference</h3>
+          <p class="mt-1 pr-12 text-[13.5px] leading-[1.3] text-slate-300">Explore endpoints</p>
+          <span class="go absolute right-4 bottom-[18px] grid h-[34px] w-[34px] place-items-center rounded-full border border-white/25 bg-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:!bg-blue-500 group-hover:!border-transparent group-hover:shadow-[0_0_18px_rgba(59,130,246,.8)]"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="#" class="gcard group relative block h-[152px] rounded-[22px] p-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] lg:-left-2" style="animation-delay:.8s,3s">
+          <span class="mb-2 grid h-12 w-12 place-items-center rounded-xl border border-white/15 bg-sky-500/20"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <h3 class="text-lg font-semibold leading-tight">Search</h3>
+          <p class="mt-1 pr-12 text-[13.5px] leading-[1.3] text-slate-300">Find anything fast</p>
+          <span class="go absolute right-4 bottom-[18px] grid h-[34px] w-[34px] place-items-center rounded-full border border-white/25 bg-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:!bg-sky-500 group-hover:!border-transparent group-hover:shadow-[0_0_18px_rgba(14,165,233,.8)]"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="#" class="gcard group relative block h-[152px] rounded-[22px] p-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] top-2" style="animation-delay:.95s,1.8s">
+          <span class="mb-2 grid h-12 w-12 place-items-center rounded-xl border border-white/15 bg-fuchsia-500/20"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="#a78bfa" stroke="#f0abfc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a2 2 0 0 1 4 0v2h4a1 1 0 0 1 1 1v4h-2a2 2 0 0 0 0 4h2v4a1 1 0 0 1-1 1h-4v-2a2 2 0 0 0-4 0v2H6a1 1 0 0 1-1-1v-4h2a2 2 0 0 0 0-4H5V6a1 1 0 0 1 1-1h4z"/></svg></span>
+          <h3 class="text-lg font-semibold leading-tight">Integrations</h3>
+          <p class="mt-1 pr-12 text-[13.5px] leading-[1.3] text-slate-300">Connect your tools</p>
+          <span class="go absolute right-4 bottom-[18px] grid h-[34px] w-[34px] place-items-center rounded-full border border-white/25 bg-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:!bg-pink-500 group-hover:!border-transparent group-hover:shadow-[0_0_18px_rgba(236,72,153,.8)]"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Features -->
+  <section id="features" class="relative z-[5] px-5 pb-8 pt-14 text-center sm:px-[46px]">
+    <h2 class="reveal text-2xl font-semibold tracking-tight">Everything you need in one place</h2>
+    <p class="reveal mt-[5px] text-[15.5px] text-slate-200">A modern documentation platform built for performance and productivity.</p>
+    <div class="mx-auto mt-[22px] grid max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+      <div class="reveal relative px-5 transition-transform duration-300 hover:-translate-y-1">
+        <svg class="mx-auto mb-2 h-7 w-7 animate-glow" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+        <h4 class="text-sm font-semibold">Lightning Fast</h4>
+        <p class="mt-[3px] text-[12.5px] leading-[1.3] text-slate-300">Blazing fast performance<br />for a smooth experience.</p>
+      </div>
+      <div class="reveal relative px-5 transition-transform duration-300 hover:-translate-y-1"><span class="absolute left-0 top-1 bottom-1 hidden w-px bg-gradient-to-b from-transparent via-white/30 to-transparent lg:block"></span>
+        <svg class="mx-auto mb-2 h-7 w-7 animate-glow" viewBox="0 0 24 24" fill="none" stroke="#d946ef" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h8M17 8h4M3 16h4M13 16h8"/><circle cx="14" cy="8" r="3"/><circle cx="10" cy="16" r="3"/></svg>
+        <h4 class="text-sm font-semibold">Fully Customizable</h4>
+        <p class="mt-[3px] text-[12.5px] leading-[1.3] text-slate-300">Tailor it to your brand.</p>
+      </div>
+      <div class="reveal relative px-5 transition-transform duration-300 hover:-translate-y-1"><span class="absolute left-0 top-1 bottom-1 hidden w-px bg-gradient-to-b from-transparent via-white/30 to-transparent lg:block"></span>
+        <svg class="mx-auto mb-2 h-7 w-7 animate-glow" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2 .7 3.5 2.5 3.5 5.5"/></svg>
+        <h4 class="text-sm font-semibold">Collaborative</h4>
+        <p class="mt-[3px] text-[12.5px] leading-[1.3] text-slate-300">Work together easily.</p>
+      </div>
+      <div class="reveal relative px-5 transition-transform duration-300 hover:-translate-y-1"><span class="absolute left-0 top-1 bottom-1 hidden w-px bg-gradient-to-b from-transparent via-white/30 to-transparent lg:block"></span>
+        <svg class="mx-auto mb-2 h-7 w-7 animate-glow" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 5.5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10v-6z"/><circle cx="12" cy="11.5" r="2"/><path d="M12 13.5V16"/></svg>
+        <h4 class="text-sm font-semibold">Secure &amp; Reliable</h4>
+        <p class="mt-[3px] text-[12.5px] leading-[1.3] text-slate-300">Your data, always safe.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>

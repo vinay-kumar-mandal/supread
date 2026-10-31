@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuNova – Programming Languages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-hex"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v14"/></svg></span>
+      <span class="logo-text">DocuNova</span>
+    </a>
+    <nav class="links" id="links">
+      <a href="#">Docs</a><a href="#">Tutorials</a><a href="#">API</a><a href="#">Changelog</a><a href="#">Pricing</a>
+    </nav>
+    <div class="nav-right">
+      <label class="nav-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="navSearch" type="text" placeholder="Search languages... (Ctrl + K)" autocomplete="off" />
+      </label>
+      <a href="#" class="btn btn-sm">Get Started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <span class="tag"><svg viewBox="0 0 24 24" fill="#c4b5fd"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg>Explore &amp; Learn</span>
+        <h1>Programming<br /><span class="grad">Languages</span></h1>
+        <p class="lead">Discover the best programming languages with complete documentation, tutorials, examples and resources to build your skills.</p>
+        <form class="hero-search" id="heroForm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="heroSearch" type="text" placeholder="Search for a language... (e.g. Python, JavaScript)" autocomplete="off" />
+          <button type="submit" class="btn">Search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="ring"></div><div class="ring r2"></div>
+        <div class="ide">
+          <div class="ide-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <div class="code">
+          <div class="row"><span class="ln">1</span><span class="l"><b class="k">def</b> <b class="f">build_better</b><b class="p">():</b></span></div>
+          <div class="row"><span class="ln">2</span><span class="l i1"><b class="c">learn</b><b class="p">()</b></span></div>
+          <div class="row"><span class="ln">3</span><span class="l i1"><b class="c">code</b><b class="p">()</b></span></div>
+          <div class="row"><span class="ln">4</span><span class="l i1"><b class="c">innovate</b><b class="p">()</b></span></div>
+          <div class="row"><span class="ln">5</span><span class="l i1"><b class="k">return</b> <b class="c">success</b><b class="p">()</b></span></div>
+        </div>
+        </div>
+        <div class="fb fb-py" data-icon="python"></div>
+        <div class="fb fb-js" data-icon="javascript"></div>
+        <div class="fb fb-cpp1" data-icon="cpp"></div>
+        <div class="fb fb-java" data-icon="java"></div>
+        <div class="fb fb-cpp2" data-icon="cpp"></div>
+        <div class="fb fb-code"><svg viewBox="0 0 24 24" fill="none" stroke="#e5e7ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <div class="filters" id="filters"></div>
+
+    <!-- GRID -->
+    <section class="grid" id="grid"></section>
+    <p class="empty" id="empty" hidden>No languages found. Try another search or category.</p>
+
+    <!-- BANNER -->
+    <section class="banner">
+      <div class="b-left">
+        <svg class="rocket" viewBox="0 0 48 48" fill="none"><path d="M30 6c8 2 12 8 12 8s-2 14-14 22l-8-8C28 16 30 6 30 6z" fill="url(#rg)"/><circle cx="29" cy="17" r="3.5" fill="#0b0e2b"/><path d="M14 28c-4 0-8 4-8 10 6 0 10-4 10-8zM20 36l-2 8 6-4z" fill="#7c3aed"/><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9d5ff"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs></svg>
+        <div><h3>Start Your Coding Journey Today</h3><p>Explore documentation, try examples and build something amazing.</p></div>
+      </div>
+      <a href="#grid" class="btn btn-lg" id="browseAll">Browse All Languages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
