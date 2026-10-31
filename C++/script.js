@@ -1,199 +1,168 @@
-const T = [
-    {
-        g: "Basics", 
-        id: "intro", 
-        t: "Introduction to C++", 
-        lead: "C++ is a cross-platform language that can be used to create high-performance applications. It is an extension of the C language.",
-        s: [
-            [
-                "Hello World", 
-                "Every C++ program must have a main() function. The #include <iostream> statement allows us to perform standard input/output operations.", 
-                `#include <iostream>
-using namespace std;
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-int main() {
-    cout << "Welcome to Supread C++ Docs!" << endl;
-    return 0;
-}`
-            ],
-            [
-                "Variables & Data Types", 
-                "In C++, you must specify the type of variable you want to create (e.g., int, string, double).", 
-                `#include <iostream>
-#include <string>
-using namespace std;
-
-int main() {
-    int age = 19;
-    string name = "Vinay";
-    double score = 98.5;
-    
-    cout << name << " is " << age << " years old." << endl;
-    return 0;
-}`
-            ]
-        ]
-    },
-    {
-        g: "Control Flow", 
-        id: "conditions", 
-        t: "Conditionals", 
-        lead: "C++ uses standard logical mathematics to evaluate conditions.",
-        s: [
-            [
-                "If / Else Statements", 
-                "Use if to specify a block of code to be executed, if a specified condition is true.", 
-                `#include <iostream>
-using namespace std;
-
-int main() {
-    int time = 20;
-    if (time < 18) {
-        cout << "Good day." << endl;
-    } else {
-        cout << "Good evening." << endl;
+  /* ---------- Ctrl/Cmd + K ---------- */
+  const searchInput = $('#searchInput');
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    } else if (e.key === 'Escape') {
+      searchInput.blur();
+      closeSidebar();
+      closeVer();
     }
-    return 0;
-}`
-            ]
-        ]
-    },
-    {
-        g: "Object Oriented", 
-        id: "classes", 
-        t: "Classes & Objects", 
-        lead: "C++ is an object-oriented programming language. Everything in C++ is associated with classes and objects.",
-        s: [
-            [
-                "Creating a Class", 
-                "Use the class keyword to create a class. Access specifiers like 'public' determine who can access the variables and functions.", 
-                `#include <iostream>
-using namespace std;
+  });
 
-class Car {
-  public:
-    string brand;
-    void honk() {
-        cout << "Beep beep!" << endl;
-    }
-};
-
-int main() {
-    Car myCar;
-    myCar.brand = "Ford";
-    
-    cout << "My car is a " << myCar.brand << endl;
-    myCar.honk();
-    return 0;
-}`
-            ]
-        ]
-    }
-];
-
-const $ = s => document.querySelector(s);
-const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-const side = $("#sidebar"), content = $("#content"), code = $("#code"), out = $("#out"), status = $("#status"), runBtn = $("#runBtn");
-
-function buildNav(q = "") {
-    let h = "", last = "";
-    T.filter(x => x.t.toLowerCase().includes(q.toLowerCase())).forEach(x => {
-        if (x.g !== last) {
-            if (last !== "") h += `</details>`;
-            h += `<details open><summary>${x.g}</summary>`;
-            last = x.g;
-        }
-        h += `<a href="#${x.id}" data-id="${x.id}">${x.t}</a>`;
+  /* ---------- Sidebar collapsible groups ---------- */
+  const setHeight = (grp, open) => {
+    const sub = $('.sub', grp);
+    sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
+  };
+  $$('.grp').forEach((grp) => {
+    setHeight(grp, true); // all open by default
+    $('.grp-btn', grp).addEventListener('click', (e) => {
+      const open = !grp.classList.contains('open');
+      grp.classList.toggle('open', open);
+      e.currentTarget.setAttribute('aria-expanded', open);
+      setHeight(grp, open);
     });
-    if (last !== "") h += `</details>`;
-    side.innerHTML = h || "<h4>No match</h4>";
-    mark();
-}
-function mark() { const id = cur(); side.querySelectorAll("a").forEach(a => a.classList.toggle("on", a.dataset.id === id)) }
-function cur() { const id = location.hash.slice(1); return T.some(x => x.id === id) ? id : T[0].id }
+  });
+  window.addEventListener('resize', () =>
+    $$('.grp.open').forEach((g) => setHeight(g, true))
+  );
 
-function render() {
-    const i = T.findIndex(x => x.id === cur()), x = T[i];
-    let h = `<h1>${x.t}</h1><p class="lead">${x.lead}</p>`;
-    x.s.forEach(([title, txt, c], n) => {
-        h += `<h2>${title}</h2>${txt ? `<p>${txt}</p>` : ""}<div class="ex"><div class="ex-head"><span>C++</span><button data-run="${i}-${n}">Try it</button></div><pre><code>${esc(c)}</code></pre></div>`;
-    });
-    h += `<div class="pager">${i > 0 ? `<a href="#${T[i - 1].id}">← ${T[i - 1].t}</a>` : "<span></span>"}${i < T.length - 1 ? `<a href="#${T[i + 1].id}">${T[i + 1].t} →</a>` : "<span></span>"}</div>`;
-    
-    const dateObj = new Date(document.lastModified);
-    const formattedDate = dateObj.toLocaleDateString('en-GB');
-    h += `<div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted);">Last update at ${formattedDate}</div>`;
-    
-    content.innerHTML = h; content.scrollIntoView(); window.scrollTo(0, 0);
-    code.value = x.s[0][2]; mark(); side.classList.remove("open");
-    document.title = x.t + " – C++ Docs";
-}
+  // active child link
+  $$('.sub a').forEach((a) =>
+    a.addEventListener('click', () => {
+      $$('.sub a').forEach((x) => x.classList.remove('active'));
+      a.classList.add('active');
+      closeSidebar();
+    })
+  );
 
-content.addEventListener("click", e => {
-    const b = e.target.closest("[data-run]"); if (!b) return;
-    const [i, n] = b.dataset.run.split("-"); code.value = T[i].s[n][2]; run();
-});
-$("#search").addEventListener("input", e => buildNav(e.target.value));
-$("#menuBtn").onclick = () => side.classList.toggle("open");
-addEventListener("hashchange", render);
+  /* ---------- Mobile drawer ---------- */
+  const sidebar = $('#sidebar');
+  const overlay = $('#overlay');
+  const menuBtn = $('#menuBtn');
+  function openSidebar() {
+    sidebar.classList.remove('-translate-x-full');
+    overlay.classList.remove('hidden');
+    menuBtn.classList.add('open');
+  }
+  function closeSidebar() {
+    if (matchMedia('(min-width:1024px)').matches) return;
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+    menuBtn.classList.remove('open');
+  }
+  menuBtn.addEventListener('click', () =>
+    sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar()
+  );
+  overlay.addEventListener('click', closeSidebar);
 
-const themes = [["light", "☀ Light"], ["dark", "🌙 Dark"], ["eye", "👁 Eye care"]];
-function setTheme(t) {
-    document.documentElement.dataset.theme = t;
-    $("#themeBtn").textContent = themes.find(x => x[0] === t)[1];
-    try { localStorage.setItem("pydocs-theme", t) } catch (e) { }
-}
-$("#themeBtn").onclick = () => {
-    const i = themes.findIndex(x => x[0] === document.documentElement.dataset.theme);
-    setTheme(themes[(i + 1) % 3][0]);
-};
-let saved = null; try { saved = localStorage.getItem("pydocs-theme") } catch (e) { }
-setTheme(saved || (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light"));
+  /* ---------- Version dropdown ---------- */
+  const verBtn = $('#verBtn');
+  const verMenu = $('#verMenu');
+  function closeVer() { verMenu.classList.add('hidden'); }
+  verBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    verMenu.classList.toggle('hidden');
+  });
+  $$('li', verMenu).forEach((li) =>
+    li.addEventListener('click', () => {
+      $('#verLabel').textContent = li.textContent;
+      closeVer();
+    })
+  );
+  document.addEventListener('click', closeVer);
 
-// --- Hide/Unhide Editor Logic ---
-const editorBtn = $("#editorBtn");
-function setEditorState(hide) {
-    document.body.classList.toggle("hide-editor", hide);
-    editorBtn.style.opacity = hide ? "0.5" : "1";
-    try { localStorage.setItem("pydocs-editor", hide ? "hidden" : "visible") } catch (e) { }
-}
-editorBtn.onclick = () => setEditorState(!document.body.classList.contains("hide-editor"));
-let savedEditor = false; try { savedEditor = localStorage.getItem("pydocs-editor") === "hidden" } catch (e) { }
-setEditorState(savedEditor);
-
-// --- Live C++ Execution using Piston API ---
-async function run() {
-    runBtn.disabled = true; out.className = ""; out.textContent = "Compiling C++ code...";
+  /* ---------- Copy ---------- */
+  const copyBtn = $('#copyBtn');
+  const copyLabel = $('#copyLabel');
+  copyBtn.addEventListener('click', async () => {
+    const text = $$('#code .t').map((t) => t.textContent).join('\n');
     try {
-        const response = await fetch("https://emacs.piston.rs/api/v2/execute", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                language: "cpp",
-                version: "10.2.0",
-                files: [{ content: code.value }]
-            })
-        });
-        const data = await response.json();
-        
-        if (data.compile && data.compile.code !== 0) {
-            out.className = "err";
-            out.textContent = data.compile.output;
-        } else {
-            out.textContent = data.run.output || "(no output)";
-        }
-    } catch (e) { 
-        out.className = "err"; 
-        out.textContent = "Compilation failed. Check your internet connection."; 
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
     }
-    runBtn.disabled = false;
-}
+    copyLabel.textContent = 'Copied!';
+    setTimeout(() => (copyLabel.textContent = 'Copy'), 1600);
+  });
 
-runBtn.onclick = run;
-$("#clearBtn").onclick = () => { out.className = ""; out.textContent = "" };
-code.addEventListener("keydown", e => {
-    if (e.key === "Tab") { e.preventDefault(); const s = code.selectionStart; code.setRangeText("    ", s, code.selectionEnd, "end") }
-    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); run() }
-});
+  /* ---------- Run (terminal mimicry) ---------- */
+  const runBtn = $('#runBtn');
+  const runLabel = $('#runLabel');
+  const out = $('#out');
+  const ide = $('#ide');
+  let running = false;
+  runBtn.addEventListener('click', () => {
+    if (running) return;
+    running = true;
+    runBtn.classList.add('running');
+    runLabel.textContent = 'Running';
+    out.classList.add('loading'); // fade current output away, show "Running..."
+    ide.classList.remove('flash');
+    void ide.offsetWidth;
+    ide.classList.add('flash'); // brief loading flash
+    setTimeout(() => {
+      out.classList.remove('loading'); // output fades back in
+      runBtn.classList.remove('running');
+      runLabel.textContent = 'Run';
+      running = false;
+    }, 900);
+  });
 
-buildNav(); render();
+  /* ---------- Scroll reveal ---------- */
+  const reveals = $$('.reveal');
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add('show');
+          io.unobserve(en.target);
+        }
+      }),
+    { threshold: 0.1 }
+  );
+  reveals.forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 70, 350)}ms`;
+    io.observe(el);
+  });
+  setTimeout(() => reveals.forEach((el) => (el.style.transitionDelay = '')), 2000);
+
+  /* ---------- "On this page" scroll-spy ---------- */
+  const tocLinks = $$('.toc');
+  const map = new Map(tocLinks.map((a) => [a.dataset.t, a]));
+  const setActive = (id) => {
+    tocLinks.forEach((a) => {
+      const on = a.dataset.t === id;
+      const top = a.classList.contains('flex'); // top-level entries
+      a.classList.toggle('text-violet-300', on && top);
+      a.classList.toggle('text-white', on && !top);
+      a.classList.toggle('text-slate-400', !on && !top);
+      a.classList.toggle('text-slate-300', !on && top);
+      const dot = $('.dot', a);
+      if (dot) dot.style.opacity = on ? 1 : 0;
+    });
+  };
+  const spy = new IntersectionObserver(
+    (entries) => {
+      const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (vis.length) setActive(vis[0].target.id);
+    },
+    { rootMargin: '-80px 0px -60% 0px' }
+  );
+  [...map.keys()].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) spy.observe(el);
+  });
+})();
