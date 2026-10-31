@@ -31,24 +31,24 @@
 
   /* ---------- data ---------- */
   const LANGS = [
-    ["Python", "python", "Simple. Powerful. Versatile.", ["popular", "data", "scripting"], true],
-    ["JavaScript", "javascript", "Bring your ideas to life on the web.", ["popular", "web", "scripting"]],
-    ["Java", "java", "Write Once, Run Anywhere.", ["popular", "mobile"]],
-    ["C++", "cpp", "High Performance. Maximum Control.", ["popular", "systems"]],
-    ["C", "c", "The Foundation of Programming.", ["systems", "popular"]],
-    ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"]],
-    ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"]],
-    ["Go", "go", "Simple, Fast, Reliable.", ["systems"]],
-    ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"]],
-    ["Kotlin", "kotlin", "Modern. Concise. Powerful.", ["mobile", "functional"]],
-    ["Swift", "swift", "Build apps for Apple platforms.", ["mobile", "functional"]],
-    ["Dart", "dart", "Build fast, beautiful apps.", ["mobile", "web"]],
-    ["Ruby", "ruby", "Elegant. Productive. Fun.", ["web", "scripting"]],
-    ["R", "r", "Statistical Computing Made Easy.", ["data", "functional"]],
-    ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"]],
-    ["HTML", "html", "Structure the web.", ["web", "other"]],
-    ["CSS", "css", "Style the web.", ["web", "other"]],
-    ["Bash", "bash", "The Unix Shell for Power Users.", ["scripting", "other"]],
+    ["Python", "python", "Simple. Powerful. Versatile.", ["popular", "data", "scripting"], true, "../python/index.html"],
+    ["JavaScript", "javascript", "Bring your ideas to life on the web.", ["popular", "web", "scripting"], false, "../JavaScript/index.html"],
+    ["Java", "java", "Write Once, Run Anywhere.", ["popular", "mobile"], false, "../java/index.html"],
+    ["C++", "cpp", "High Performance. Maximum Control.", ["popular", "systems"], false, "../C++/index.html"],
+    ["C", "c", "The Foundation of Programming.", ["systems", "popular"], false, "../C/index.html"],
+    ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "#"],
+    ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "#"],
+    ["Go", "go", "Simple, Fast, Reliable.", ["systems"], false, "#"],
+    ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"], false, "#"],
+    ["Kotlin", "kotlin", "Modern. Concise. Powerful.", ["mobile", "functional"], false, "#"],
+    ["Swift", "swift", "Build apps for Apple platforms.", ["mobile", "functional"], false, "#"],
+    ["Dart", "dart", "Build fast, beautiful apps.", ["mobile", "web"], false, "#"],
+    ["Ruby", "ruby", "Elegant. Productive. Fun.", ["web", "scripting"], false, "#"],
+    ["R", "r", "Statistical Computing Made Easy.", ["data", "functional"], false, "#"],
+    ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"], false, "#"],
+    ["HTML", "html", "Structure the web.", ["web", "other"], false, "#"],
+    ["CSS", "css", "Style the web.", ["web", "other"], false, "#"],
+    ["Bash", "bash", "The Unix Shell for Power Users.", ["scripting", "other"], false, "#"],
   ];
 
   const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
@@ -76,11 +76,11 @@
   ).join('');
 
   grid.innerHTML = LANGS.map(
-    ([name, icon, desc, cats, hot], i) => `
+    ([name, icon, desc, cats, hot, link], i) => `
     <article class="lang" data-name="${name.toLowerCase()}" data-cats="${cats.join(' ')}" style="animation-delay:${0.35 + i * 0.045}s">
       ${hot ? '<span class="badge">🔥 Most Popular</span>' : ''}
       <div class="l-top"><div class="l-ico">${ICONS[icon]}</div><div class="l-txt"><h4>${name}</h4><p>${desc}</p></div></div>
-      <a href="../python/index.html" class="docs">View Docs <span>→</span></a>
+      <a href="${link}" class="docs">View Docs <span>→</span></a>
     </article>`
   ).join('');
 
