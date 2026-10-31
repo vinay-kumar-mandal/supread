@@ -80,7 +80,7 @@
     <article class="lang" data-name="${name.toLowerCase()}" data-cats="${cats.join(' ')}" style="animation-delay:${0.35 + i * 0.045}s">
       ${hot ? '<span class="badge">🔥 Most Popular</span>' : ''}
       <div class="l-top"><div class="l-ico">${ICONS[icon]}</div><div class="l-txt"><h4>${name}</h4><p>${desc}</p></div></div>
-      <a href="#" class="docs">View Docs <span>→</span></a>
+      <a href="../python/index.html" class="docs">View Docs <span>→</span></a>
     </article>`
   ).join('');
 
