@@ -39,7 +39,7 @@
     ["C#", "csharp", "Modern, object-oriented, and type-safe.", ["popular", "systems"], false, "../C#/index.html"], // Added C# Entry
     ["C", "c", "The Foundation of Programming.", ["systems", "popular"], false, "../C/index.html"],
     ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "../typescript/index.html"],
-    ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "#"],
+    ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "../PHP/index.html"],
     ["Go", "go", "Simple, Fast, Reliable.", ["systems"], false, "#"],
     ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"], false, "#"],
     ["Kotlin", "kotlin", "Modern. Concise. Powerful.", ["mobile", "functional"], false, "#"],
