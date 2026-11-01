@@ -13,6 +13,7 @@
     javascript: `<svg viewBox="0 0 48 48"><rect x="3" y="3" width="42" height="42" rx="3" fill="#F7DF1E"/><text x="42" y="41" text-anchor="end" font-family="Inter,Arial" font-weight="800" font-size="22" fill="#111">JS</text></svg>`,
     java: `<svg viewBox="0 0 48 48"><path d="M26 3c4 5-6 8-2 14M30 9c3 4-4 6-2 10" stroke="#F0612B" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M10 26h24v4a9 9 0 0 1-9 9h-6a9 9 0 0 1-9-9z" fill="#5B8FD6"/><path d="M34 28c6-1 7 7-1 8" stroke="#5B8FD6" stroke-width="2.4" fill="none"/><path d="M8 43h28" stroke="#F0612B" stroke-width="2.4" stroke-linecap="round"/></svg>`,
     cpp: hex("#1F6FD1", "C++", 14),
+    csharp: hex("#68217A", "C#", 16), // Added C# Icon
     c: hex("#2F6FD8", "C", 22),
     typescript: `<svg viewBox="0 0 48 48"><rect x="3" y="3" width="42" height="42" rx="4" fill="#3178C6"/><text x="42" y="41" text-anchor="end" font-family="Inter,Arial" font-weight="800" font-size="21" fill="#fff">TS</text></svg>`,
     php: `<svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="22" ry="13" fill="#777BB4"/><text x="24" y="29" text-anchor="middle" font-family="Inter,Arial" font-weight="800" font-style="italic" font-size="16" fill="#111">php</text></svg>`,
@@ -35,6 +36,7 @@
     ["JavaScript", "javascript", "Bring your ideas to life on the web.", ["popular", "web", "scripting"], false, "../JavaScript/index.html"],
     ["Java", "java", "Write Once, Run Anywhere.", ["popular", "mobile"], false, "../java/index.html"],
     ["C++", "cpp", "High Performance. Maximum Control.", ["popular", "systems"], false, "../C++/index.html"],
+    ["C#", "csharp", "Modern, object-oriented, and type-safe.", ["popular", "systems"], false, "../C#/index.html"], // Added C# Entry
     ["C", "c", "The Foundation of Programming.", ["systems", "popular"], false, "../C/index.html"],
     ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "#"],
     ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "#"],
