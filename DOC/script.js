@@ -40,7 +40,7 @@
     ["C", "c", "The Foundation of Programming.", ["systems", "popular"], false, "../C/index.html"],
     ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "../typescript/index.html"],
     ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "../PHP/index.html"],
-    ["Go", "go", "Simple, Fast, Reliable.", ["systems"], false, "#"],
+    ["Go", "go", "Simple, Fast, Reliable.", ["systems"], false, "../GO/index.html"],
     ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"], false, "#"],
     ["Kotlin", "kotlin", "Modern. Concise. Powerful.", ["mobile", "functional"], false, "#"],
     ["Swift", "swift", "Build apps for Apple platforms.", ["mobile", "functional"], false, "#"],
