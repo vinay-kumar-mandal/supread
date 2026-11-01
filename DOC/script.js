@@ -38,7 +38,7 @@
     ["C++", "cpp", "High Performance. Maximum Control.", ["popular", "systems"], false, "../C++/index.html"],
     ["C#", "csharp", "Modern, object-oriented, and type-safe.", ["popular", "systems"], false, "../C#/index.html"], // Added C# Entry
     ["C", "c", "The Foundation of Programming.", ["systems", "popular"], false, "../C/index.html"],
-    ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "#"],
+    ["TypeScript", "typescript", "JavaScript with static types.", ["popular", "web"], false, "../typescript/index.html"],
     ["PHP", "php", "Build dynamic web applications.", ["web", "scripting"], false, "#"],
     ["Go", "go", "Simple, Fast, Reliable.", ["systems"], false, "#"],
     ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"], false, "#"],
@@ -50,7 +50,7 @@
     ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"], false, "#"],
     ["HTML", "html", "Structure the web.", ["web", "other"], false, "#"],
     ["CSS", "css", "Style the web.", ["web", "other"], false, "#"],
-    ["Bash", "bash", "The Unix Shell for Power Users.", ["scripting", "other"], false, "#"],
+    ["Bash", "bash", "The Unix Shell for Power Users.", ["scripting", "other"], false, "../bash/index.html"],
   ];
 
   const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
