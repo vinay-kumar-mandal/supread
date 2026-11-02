@@ -46,10 +46,10 @@
     ["Swift", "swift", "Build apps for Apple platforms.", ["mobile", "functional"], false, "../swift/index.html"],
     ["Dart", "dart", "Build fast, beautiful apps.", ["mobile", "web"], false, "../Dart/index.html"],
     ["Ruby", "ruby", "Elegant. Productive. Fun.", ["web", "scripting"], false, "../Ruby/index.html"],
-    ["R", "r", "Statistical Computing Made Easy.", ["data", "functional"], false, "#"],
-    ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"], false, "#"],
-    ["HTML", "html", "Structure the web.", ["web", "other"], false, "#"],
-    ["CSS", "css", "Style the web.", ["web", "other"], false, "#"],
+    ["R", "r", "Statistical Computing Made Easy.", ["data", "functional"], false, "../R/index.html"],
+    ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"], false, "../sql/index.html"],
+    ["HTML", "html", "Structure the web.", ["web", "other"], false, "../html/index.html"],
+    ["CSS", "css", "Style the web.", ["web", "other"], false, "../css/index.html"],
     ["Bash", "bash", "The Unix Shell for Power Users.", ["scripting", "other"], false, "../bash/index.html"],
   ];
 
