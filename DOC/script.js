@@ -44,7 +44,7 @@
     ["Rust", "rust", "Safe. Fast. Productive.", ["systems", "functional"], false, "../Rust/index.html"],
     ["Kotlin", "kotlin", "Modern. Concise. Powerful.", ["mobile", "functional"], false, "../Kotlin/index.html"],
     ["Swift", "swift", "Build apps for Apple platforms.", ["mobile", "functional"], false, "../swift/index.html"],
-    ["Dart", "dart", "Build fast, beautiful apps.", ["mobile", "web"], false, "#"],
+    ["Dart", "dart", "Build fast, beautiful apps.", ["mobile", "web"], false, "../Dart/index.html"],
     ["Ruby", "ruby", "Elegant. Productive. Fun.", ["web", "scripting"], false, "#"],
     ["R", "r", "Statistical Computing Made Easy.", ["data", "functional"], false, "#"],
     ["SQL", "sql", "Manage and query data efficiently.", ["data", "other"], false, "#"],
