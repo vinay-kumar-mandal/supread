@@ -2,75 +2,151 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* ---------- JAVASCRIPT DATA ---------- */
+  /* ---------- FULL JAVASCRIPT DATA ---------- */
   const T = [
+    // --- GETTING STARTED ---
     {
-        g: "Basics", id: "intro", t: "Introduction to JavaScript", 
-        lead: "JavaScript is the versatile, dynamic programming language of the web, enabling interactive and complex features.",
+        g: "Getting Started", id: "installation", t: "Installation", 
+        lead: "JavaScript runs natively in every modern web browser, so you don't need to install anything to start learning.",
         s: [
-            ["What is JavaScript?", "Created in 1995 by Brendan Eich, JavaScript is a high-level, just-in-time compiled language. It is a core technology of the World Wide Web, alongside HTML and CSS.", `// A simple JavaScript greeting\nfunction greet(name) {\n  return \`Hello, \${name}! Welcome to JS.\`;\n}\n\nconsole.log(greet("Developer"));`],
-            ["Client-Side Execution", "JS runs directly in the user's browser, allowing for immediate feedback and DOM manipulation without reloading the page.", `// Manipulating the browser console\nconsole.log("Step 1: Script loaded");\nlet status = "Active";\nif (status === "Active") {\n  console.log("System is ready!");\n}`]
+            ["Browser Environment", "Every modern browser has a built-in JavaScript engine (like V8 in Chrome). You can run JS right now by pressing F12 and opening the Console.", `// Try this in your browser console or run it here\nconsole.log("JavaScript is already installed!");`],
+            ["Node.js (Server-side)", "To run JavaScript outside the browser (for backend development), you need to install Node.js from nodejs.org.", `// Run this using 'node filename.js' in your terminal\nconst environment = typeof window === 'undefined' ? 'Node.js' : 'Browser';\nconsole.log(\`Running in: \${environment}\`);`]
         ]
     },
     {
-        g: "Basics", id: "variables", t: "Variables & Data Types", 
-        lead: "JavaScript is dynamically typed and uses var, let, and const to declare variables.",
+        g: "Getting Started", id: "first-program", t: "Your First Program", 
+        lead: "The tradition of programming starts with printing 'Hello, World!' to the screen.",
         s: [
-            ["let and const", "Always use 'const' for values that won't change, and 'let' for variables that will. Avoid using the outdated 'var' keyword.", `const siteName = "DocuNova";\nlet visitorCount = 100;\n\n// We can update a 'let' variable\nvisitorCount += 1;\nconsole.log(\`\${siteName} has \${visitorCount} visitors.\`);`],
-            ["Data Types", "JS primitives include String, Number, Boolean, Null, Undefined, Symbol, and BigInt.", `const price = 49.99; // Number\nconst isActive = true; // Boolean\nconst user = null; // Null\n\nconsole.log(typeof price);\nconsole.log(typeof isActive);`]
+            ["Hello World", "In JavaScript, we use the console.log() function to print messages to the developer console.", `// This prints a message to the output console\nconsole.log("Hello, World!");\n\nconst language = "JavaScript";\nconsole.log(\`Welcome to \${language}!\`);`]
         ]
     },
     {
-        g: "Basics", id: "operators", t: "Operators & Logic", 
-        lead: "Operators perform tests, math, and assignments on variables.",
+        g: "Getting Started", id: "basic-syntax", t: "Basic Syntax", 
+        lead: "JavaScript syntax is the set of rules that defines a correctly structured JavaScript program.",
         s: [
-            ["Strict Equality (===)", "Always use '===' (strict equality) instead of '==' to avoid unexpected type coercion bugs.", `const num = 5;\nconst str = "5";\n\nconsole.log(num == str);  // true (type coerced)\nconsole.log(num === str); // false (strict type check)`],
-            ["Logical Operators", "Use && (AND), || (OR), and ! (NOT) for logic evaluation.", `const hasAccount = true;\nconst isLoggedIn = false;\n\nif (hasAccount && !isLoggedIn) {\n  console.log("Please log in to continue.");\n}`]
+            ["Statements and Semicolons", "A computer program is a list of 'instructions' to be executed by a computer. In JS, these instructions are called statements, usually separated by semicolons.", `let x = 5; // Statement 1\nlet y = 6; // Statement 2\nlet z = x + y; // Statement 3\nconsole.log("Result:", z);`],
+            ["Comments", "Comments are used to explain code and make it more readable. They are ignored by the JavaScript engine.", `// This is a single-line comment\n\n/*\nThis is a multi-line comment.\nIt can span across several lines.\n*/\nconsole.log("Comments are invisible to the engine.");`],
+            ["Case Sensitivity", "JavaScript is strictly case-sensitive. The variables 'myVar' and 'myvar' are treated as two completely different variables.", `let lastName = "Doe";\nlet lastname = "Smith";\n\nconsole.log(lastName); // Outputs "Doe"\nconsole.log(lastname); // Outputs "Smith"`]
+        ]
+    },
+
+    // --- CORE CONCEPTS ---
+    {
+        g: "Core Concepts", id: "variables", t: "Variables and Data Types", 
+        lead: "Variables store data values. JavaScript provides multiple data types to handle different kinds of information.",
+        s: [
+            ["let, const, and var", "Use 'const' for values that won't change, and 'let' for variables that will. Avoid 'var' due to its confusing scoping rules.", `const maxUsers = 100;\nlet currentUsers = 50;\n\ncurrentUsers += 5; // Valid update for let\n// maxUsers = 150; // Error: Assignment to constant variable.\n\nconsole.log(\`Active users: \${currentUsers} / \${maxUsers}\`);`],
+            ["Primitive Data Types", "The main primitive types are String, Number, Boolean, Undefined, and Null.", `const title = "DocuNova";   // String\nconst price = 49.99;        // Number\nconst isActive = true;      // Boolean\nlet noValueAssigned;        // Undefined\nconst emptyValue = null;    // Null\n\nconsole.log(typeof title, typeof price, typeof isActive);`]
         ]
     },
     {
-        g: "Data Types", id: "strings", t: "Strings & Templates", 
-        lead: "Strings represent text and provide numerous methods for manipulation.",
+        g: "Core Concepts", id: "control-flow", t: "Control Flow", 
+        lead: "Control flow statements dictate the path your code takes based on conditions and loops.",
         s: [
-            ["Template Literals", "Template literals (using backticks) allow embedded expressions and multi-line strings.", `const item = "Coffee";\nconst price = 3.50;\n\n// Embedded variables\nconst msg = \`One \${item} costs $\${price}.\`;\nconsole.log(msg);`],
-            ["String Methods", "Strings have built-in methods like .toUpperCase(), .slice(), and .includes().", `const text = "JavaScript is awesome";\nconsole.log(text.toUpperCase());\nconsole.log(text.includes("Script"));`]
+            ["If / Else Statements", "Execute blocks of code conditionally.", `const hour = 14;\n\nif (hour < 12) {\n  console.log("Good morning!");\n} else if (hour < 18) {\n  console.log("Good afternoon!");\n} else {\n  console.log("Good evening!");\n}`],
+            ["Switch Statement", "The switch statement evaluates an expression and executes code matching a case clause.", `const role = "admin";\n\nswitch (role) {\n  case "admin":\n    console.log("Full access granted.");\n    break;\n  case "editor":\n    console.log("Edit access granted.");\n    break;\n  default:\n    console.log("Read-only access.");\n}`],
+            ["Loops (For & While)", "Loops are handy if you want to run the same code over and over again, each time with a different value.", `// For Loop\nfor (let i = 1; i <= 3; i++) {\n  console.log(\`Iteration \${i}\`);\n}\n\n// While Loop\nlet count = 3;\nwhile (count > 0) {\n  console.log(count + "...");\n  count--;\n}\nconsole.log("Liftoff!");`]
         ]
     },
     {
-        g: "Data Types", id: "arrays", t: "Arrays", 
-        lead: "Arrays are list-like objects used to store multiple values in a single variable.",
+        g: "Core Concepts", id: "functions", t: "Functions", 
+        lead: "Functions are blocks of code designed to perform a particular task when invoked.",
         s: [
-            ["Array Methods", "Arrays come with powerful methods like .push(), .map(), and .filter().", `const numbers = [1, 2, 3, 4];\nnumbers.push(5); // Adds to end\n\n// Using .map() to double values\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);`],
-            ["Destructuring", "Extract array values directly into distinct variables.", `const colors = ["Red", "Green", "Blue"];\nconst [firstColor, secondColor] = colors;\n\nconsole.log(firstColor); // Red`]
+            ["Function Declarations", "A standard function declaration is hoisted, meaning it can be called before it is defined.", `console.log(multiply(4, 5)); // Works due to hoisting\n\nfunction multiply(a, b) {\n  return a * b;\n}`],
+            ["Arrow Functions", "Introduced in ES6, arrow functions provide a shorter syntax and do not bind their own 'this' context.", `const add = (a, b) => a + b;\n\n// Multi-line arrow function\nconst greet = name => {\n  const message = \`Hello, \${name}\`;\n  return message;\n};\n\nconsole.log(add(10, 20));\nconsole.log(greet("Alice"));`]
         ]
     },
     {
-        g: "Data Types", id: "objects", t: "Objects", 
-        lead: "Objects are collections of key-value pairs, crucial for structuring data.",
+        g: "Core Concepts", id: "objects-arrays", t: "Objects and Arrays", 
+        lead: "Complex data structures in JavaScript are built using Objects (key-value pairs) and Arrays (ordered lists).",
         s: [
-            ["Object Creation", "Create objects using curly braces '{}' with property names and values.", `const user = {\n  name: "Alice",\n  role: "Admin",\n  age: 28\n};\n\nconsole.log(user.name);\nconsole.log(user["role"]);`],
-            ["Object Destructuring", "Extract properties from objects into variables easily.", `const settings = {\n  theme: "dark",\n  notifications: true\n};\n\nconst { theme, notifications } = settings;\nconsole.log(\`Theme is \${theme}\`);`]
+            ["Working with Objects", "Objects are variables that can contain many values represented as properties.", `const car = {\n  brand: "Tesla",\n  model: "Model 3",\n  start: function() {\n    return "Engine started!";\n  }\n};\n\nconsole.log(car.brand);\nconsole.log(car.start());`],
+            ["Working with Arrays", "Arrays are special objects used to store multiple values in a single variable.", `const fruits = ["Apple", "Banana", "Cherry"];\n\nfruits.push("Mango"); // Add item\n\nfruits.forEach((fruit, index) => {\n  console.log(\`\${index + 1}. \${fruit}\`);\n});`],
+            ["Destructuring", "A syntax that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.", `// Object Destructuring\nconst user = { id: 42, username: "johndoe" };\nconst { id, username } = user;\n\n// Array Destructuring\nconst rgb = [255, 100, 50];\nconst [r, g, b] = rgb;\n\nconsole.log(\`User \${username} has ID \${id}\`);\nconsole.log(\`Red: \${r}\`);`]
         ]
     },
     {
-        g: "Control Flow", id: "conditions", t: "Conditionals", 
-        lead: "Use if-else and switch statements to control the flow of your program.",
+        g: "Core Concepts", id: "modules", t: "Modules", 
+        lead: "Modules allow you to break up your code into separate files, making it easier to maintain and reuse.",
         s: [
-            ["Ternary Operator", "A concise way to write simple if-else statements in one line.", `const age = 20;\nconst status = age >= 18 ? "Adult" : "Minor";\nconsole.log(status);`]
+            ["Export and Import", "Use 'export' to make functions or variables available, and 'import' to use them in another file. (Note: Imports require a module environment, so they are simulated here).", `// In math.js: \n// export const add = (a, b) => a + b;\n\n// In main.js:\n// import { add } from './math.js';\n\nconsole.log("Modules keep code organized across multiple files!");`]
+        ]
+    },
+
+    // --- ADVANCED TOPICS ---
+    {
+        g: "Advanced Topics", id: "closures", t: "Closures", 
+        lead: "A closure is a feature where an inner function has access to the outer (enclosing) function's variables.",
+        s: [
+            ["Lexical Scoping", "Even after the outer function has finished executing, the inner function retains access to the scope it was created in.", `function createCounter() {\n  let count = 0; // Private variable\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\nconsole.log(counter()); // 3`]
         ]
     },
     {
-        g: "Functions", id: "functions", t: "Functions & Scope", 
-        lead: "Functions encapsulate reusable logic.",
+        g: "Advanced Topics", id: "promises-async", t: "Promises and Async", 
+        lead: "JavaScript handles asynchronous operations (like network requests) using Promises and the async/await syntax.",
         s: [
-            ["Arrow Functions", "ES6 introduced arrow functions for shorter syntax and lexical 'this' binding.", `// Standard Function\nfunction add(a, b) { return a + b; }\n\n// Arrow Function\nconst multiply = (a, b) => a * b;\n\nconsole.log(add(5, 5));\nconsole.log(multiply(5, 5));`]
+            ["Promises", "A Promise represents the eventual completion (or failure) of an asynchronous operation.", `const checkWeather = new Promise((resolve, reject) => {\n  const isSunny = true;\n  if (isSunny) resolve("Go outside!");\n  else reject("Stay home.");\n});\n\ncheckWeather\n  .then(msg => console.log(msg))\n  .catch(err => console.error(err));`],
+            ["Async / Await", "Syntactic sugar over Promises, making asynchronous code look synchronous.", `const fetchUserData = async () => {\n  console.log("Fetching...");\n  // Simulate network delay\n  await new Promise(r => setTimeout(r, 1000));\n  return { user: "Vinay", role: "Admin" };\n};\n\nconst data = await fetchUserData();\nconsole.log("Data loaded:", data);`]
         ]
     },
     {
-        g: "Advanced", id: "async", t: "Promises & Async/Await", 
-        lead: "Handle asynchronous operations like API fetches without blocking the main thread.",
+        g: "Advanced Topics", id: "event-loop", t: "Event Loop", 
+        lead: "The Event Loop is the secret behind JavaScript's asynchronous, non-blocking behavior.",
         s: [
-            ["Async / Await", "Write asynchronous code that looks and behaves like synchronous code.", `const fetchUser = async () => {\n  console.log("Fetching data...");\n  // Simulating network delay\n  await new Promise(r => setTimeout(r, 1000));\n  return { id: 1, name: "John Doe" };\n};\n\nfetchUser().then(user => console.log("Fetched:", user));`]
+            ["Call Stack and Queues", "Microtasks (Promises) always run before Macrotasks (setTimeout).", `console.log("1. Script Start");\n\nsetTimeout(() => {\n  console.log("4. Macrotask (setTimeout)");\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log("3. Microtask (Promise)");\n});\n\nconsole.log("2. Script End");\n// Notice the order of execution!`]
+        ]
+    },
+    {
+        g: "Advanced Topics", id: "error-handling", t: "Error Handling", 
+        lead: "Proper error handling prevents your application from crashing unexpectedly.",
+        s: [
+            ["Try...Catch", "Wrap risky code in a try block, and handle the error in the catch block.", `try {\n  const num = 10;\n  // Attempting to call a non-existent function\n  num.toUpperCase(); \n} catch (error) {\n  console.log("Caught an error:");\n  console.log(error.message);\n} finally {\n  console.log("Cleanup: This runs no matter what.");\n}`]
+        ]
+    },
+
+    // --- LIBRARIES ---
+    {
+        g: "Libraries", id: "react", t: "React", 
+        lead: "A popular library for building user interfaces using a component-based architecture.",
+        s: [
+            ["JSX and Components", "React uses JSX, a syntax extension that looks like HTML inside JavaScript.", `// Conceptual React Component Example\nfunction Welcome(props) {\n  return \`<h1>Hello, \${props.name}</h1>\`;\n}\n\nconsole.log(Welcome({ name: "DocuNova User" }));`]
+        ]
+    },
+    {
+        g: "Libraries", id: "nodejs", t: "Node.js & Express", 
+        lead: "Node.js allows JS to run on the server, and Express is its most popular web framework.",
+        s: [
+            ["Express Server Concept", "Express makes setting up a backend API incredibly simple.", `// Conceptual Express Server\nconst expressApp = {\n  get: (route, callback) => console.log(\`Route \${route} registered.\`),\n  listen: (port) => console.log(\`Server running on port \${port}\`)\n};\n\nexpressApp.get('/api/users', (req, res) => {});\nexpressApp.listen(3000);`]
+        ]
+    },
+    {
+        g: "Libraries", id: "lodash", t: "Lodash", 
+        lead: "A modern JavaScript utility library delivering modularity, performance & extras.",
+        s: [
+            ["Utility Functions", "Lodash makes working with arrays, numbers, and objects much easier.", `// Conceptual Lodash cloneDeep\nconst original = { a: 1, b: { c: 2 } };\nconst clone = JSON.parse(JSON.stringify(original)); // Native deep clone trick\n\nclone.b.c = 99;\nconsole.log("Original:", original.b.c); // 2\nconsole.log("Clone:", clone.b.c); // 99`]
+        ]
+    },
+
+    // --- RESOURCES ---
+    {
+        g: "Resources", id: "cheatsheet", t: "Cheatsheet", 
+        lead: "A quick reference guide for common JavaScript operations.",
+        s: [
+            ["Array Methods Cheatsheet", "Quick reference for transforming arrays.", `const arr = [1, 2, 3, 4, 5];\n\n// .map() - Transform every item\nconsole.log("Map:", arr.map(x => x * 10));\n\n// .filter() - Keep specific items\nconsole.log("Filter:", arr.filter(x => x % 2 === 0));\n\n// .reduce() - Accumulate to a single value\nconsole.log("Reduce:", arr.reduce((acc, curr) => acc + curr, 0));`]
+        ]
+    },
+    {
+        g: "Resources", id: "examples", t: "Examples", 
+        lead: "Real-world snippets to solve common programming challenges.",
+        s: [
+            ["Debounce Function", "Ensure a function is not called too frequently (e.g., search input typing).", `function debounce(func, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => func.apply(this, args), delay);\n  };\n}\n\nconst log = debounce(() => console.log("Fired!"), 500);\nlog(); log(); log(); \n// Only fires once after 500ms`]
+        ]
+    },
+    {
+        g: "Resources", id: "faq", t: "FAQ", 
+        lead: "Frequently asked questions by JavaScript learners.",
+        s: [
+            ["null vs undefined", "What is the difference between null and undefined?", `let a; // Declared but not assigned\nlet b = null; // Explicitly set to 'no value'\n\nconsole.log("a is:", typeof a); // undefined\nconsole.log("b is:", typeof b); // object (a known bug in JS!)\nconsole.log(a === b); // false`]
         ]
     }
   ];
@@ -290,6 +366,27 @@
     });
   }
 
+  // Copy Button
+  const copyBtn = $('#copyBtn');
+  const copyLabel = $('#copyLabel');
+  if(copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const text = codeEditor ? codeEditor.value : '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        copyLabel.textContent = 'Copied!';
+        setTimeout(() => (copyLabel.textContent = 'Copy'), 1600);
+      });
+  }
+
   /* ---------- Sidebar & Modals ---------- */
   const sidebar = $('#sidebar');
   const overlay = $('#overlay');
@@ -305,6 +402,19 @@
   if(verBtn) verBtn.addEventListener('click', (e) => { e.stopPropagation(); verMenu.classList.toggle('hidden'); });
   $$('#verMenu li').forEach((li) => li.addEventListener('click', () => { $('#verLabel').textContent = li.textContent; closeVer(); }));
   document.addEventListener('click', closeVer);
+  
+  // Global Keyboard Shortcuts (Ctrl+K)
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if(searchInput) { searchInput.focus(); searchInput.select(); }
+    } else if (e.key === 'Escape') {
+      if(searchInput) searchInput.blur();
+      closeSidebar();
+      closeVer();
+    }
+  });
+
   window.addEventListener('hashchange', renderContent);
 
   // Initialize
