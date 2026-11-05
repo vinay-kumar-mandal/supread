@@ -2,226 +2,345 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* ---------- FULL JAVASCRIPT DATA ---------- */
+  /* ---------- SVG ASSETS ---------- */
+  const ICONS = {
+    book: `<svg class="h-4 w-4 text-violet-200" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>`,
+    code: `<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>`,
+    zap: `<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>`,
+    globe: `<svg class="h-4 w-4 flex-none text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>`,
+    shield: `<svg class="h-4 w-4 flex-none text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+  };
+
+  /* ---------- EXHAUSTIVE JAVASCRIPT DOCUMENTATION DATA ---------- */
   const T = [
     // --- GETTING STARTED ---
     {
-        g: "Getting Started", id: "installation", t: "Installation", 
-        icon: '<svg class="h-4 w-4 text-violet-200" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
-        lead: "JavaScript runs natively in every modern web browser, so you don't need to install anything to start learning.",
+        g: "Getting Started", id: "intro", t: "Introduction & Execution", 
+        icon: ICONS.book,
+        lead: "JavaScript is a high-level, JIT-compiled, multi-paradigm language. It serves as the definitive execution engine of the modern web, running seamlessly across browsers and server environments.",
         s: [
-            ["Browser Environment", "Every modern browser has a built-in JavaScript engine (like V8 in Chrome). You can run JS right now by pressing F12 and opening the Console.", `// Try this in your browser console or run it here\nconsole.log("JavaScript is already installed!");`],
-            ["Node.js (Server-side)", "To run JavaScript outside the browser (for backend development), you need to install Node.js from nodejs.org.", `// Run this using 'node filename.js' in your terminal\nconst environment = typeof window === 'undefined' ? 'Node.js' : 'Browser';\nconsole.log(\`Running in: \${environment}\`);`]
-        ]
-    },
-    {
-        g: "Getting Started", id: "first-program", t: "Your First Program", 
-        icon: '<svg class="h-4 w-4 text-violet-200" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
-        lead: "The tradition of programming starts with printing 'Hello, World!' to the screen.",
-        s: [
-            ["Hello World", "In JavaScript, we use the console.log() function to print messages to the developer console.", `// This prints a message to the output console\nconsole.log("Hello, World!");\n\nconst language = "JavaScript";\nconsole.log(\`Welcome to \${language}!\`);`]
-        ]
-    },
-    {
-        g: "Getting Started", id: "basic-syntax", t: "Basic Syntax", 
-        icon: '<svg class="h-4 w-4 text-violet-200" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
-        lead: "JavaScript syntax is the set of rules that defines a correctly structured JavaScript program.",
-        s: [
-            ["Statements and Semicolons", "A computer program is a list of 'instructions' to be executed by a computer. In JS, these instructions are called statements, usually separated by semicolons.", `let x = 5; // Statement 1\nlet y = 6; // Statement 2\nlet z = x + y; // Statement 3\nconsole.log("Result:", z);`],
-            ["Comments", "Comments are used to explain code and make it more readable. They are ignored by the JavaScript engine.", `// This is a single-line comment\n\n/*\nThis is a multi-line comment.\nIt can span across several lines.\n*/\nconsole.log("Comments are invisible to the engine.");`],
-            ["Case Sensitivity", "JavaScript is strictly case-sensitive. The variables 'myVar' and 'myvar' are treated as two completely different variables.", `let lastName = "Doe";\nlet lastname = "Smith";\n\nconsole.log(lastName); // Outputs "Doe"\nconsole.log(lastname); // Outputs "Smith"`]
-        ]
-    },
+            ["The Execution Environment", "Unlike traditional compiled languages, JavaScript is processed by browser engines like Google's V8 or Mozilla's SpiderMonkey. These engines parse the source code into an Abstract Syntax Tree (AST), compile it to bytecode, and aggressively optimize it into machine code at runtime.", `// Outputting data to the console
+console.log("Welcome to the Ultimate JavaScript Engine.");
 
+// Execution context is established immediately
+const engine = "V8 Runtime";
+console.log(\`Powered by the \${engine}.\`);`],
+            ["The DOM Interface", "JavaScript acts as the bridge between static HTML and dynamic user interfaces. Through the Document Object Model (DOM) API, developers can utilize methods like querySelector and addEventListener to manipulate nodes and intercept hardware events dynamically.", `// Safe DOM Execution
+if (typeof document !== "undefined") {
+    console.log("DOM is accessible. Ready to manipulate nodes.");
+} else {
+    console.log("Executing in a Node.js or headless environment.");
+}`]
+        ]
+    },
+    
     // --- CORE CONCEPTS ---
     {
-        g: "Core Concepts", id: "variables", t: "Variables and Data Types", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>',
-        lead: "Variables store data values. JavaScript provides multiple data types to handle different kinds of information.",
+        g: "Core Concepts", id: "variables", t: "Variables & Lexical Scoping", 
+        icon: ICONS.code,
+        lead: "Variables represent memory references. Modern JavaScript strictly utilizes block-scoped declarations to maintain predictable memory states and avoid namespace collisions.",
         s: [
-            ["let, const, and var", "Use 'const' for values that won't change, and 'let' for variables that will. Avoid 'var' due to its confusing scoping rules.", `const maxUsers = 100;\nlet currentUsers = 50;\n\ncurrentUsers += 5; // Valid update for let\n// maxUsers = 150; // Error: Assignment to constant variable.\n\nconsole.log(\`Active users: \${currentUsers} / \${maxUsers}\`);`],
-            ["Primitive Data Types", "The main primitive types are String, Number, Boolean, Undefined, and Null.", `const title = "DocuNova";   // String\nconst price = 49.99;        // Number\nconst isActive = true;      // Boolean\nlet noValueAssigned;        // Undefined\nconst emptyValue = null;    // Null\n\nconsole.log(typeof title, typeof price, typeof isActive);`]
-        ]
-    },
-    {
-        g: "Core Concepts", id: "control-flow", t: "Control Flow", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>',
-        lead: "Control flow statements dictate the path your code takes based on conditions and loops.",
-        s: [
-            ["If / Else Statements", "Execute blocks of code conditionally.", `const hour = 14;\n\nif (hour < 12) {\n  console.log("Good morning!");\n} else if (hour < 18) {\n  console.log("Good afternoon!");\n} else {\n  console.log("Good evening!");\n}`],
-            ["Switch Statement", "The switch statement evaluates an expression and executes code matching a case clause.", `const role = "admin";\n\nswitch (role) {\n  case "admin":\n    console.log("Full access granted.");\n    break;\n  case "editor":\n    console.log("Edit access granted.");\n    break;\n  default:\n    console.log("Read-only access.");\n}`],
-            ["Loops (For & While)", "Loops are handy if you want to run the same code over and over again, each time with a different value.", `// For Loop\nfor (let i = 1; i <= 3; i++) {\n  console.log(\`Iteration \${i}\`);\n}\n\n// While Loop\nlet count = 3;\nwhile (count > 0) {\n  console.log(count + "...");\n  count--;\n}\nconsole.log("Liftoff!");`]
-        ]
-    },
-    {
-        g: "Core Concepts", id: "functions", t: "Functions", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>',
-        lead: "Functions are blocks of code designed to perform a particular task when invoked.",
-        s: [
-            ["Function Declarations", "A standard function declaration is hoisted, meaning it can be called before it is defined.", `console.log(multiply(4, 5)); // Works due to hoisting\n\nfunction multiply(a, b) {\n  return a * b;\n}`],
-            ["Arrow Functions", "Introduced in ES6, arrow functions provide a shorter syntax and do not bind their own 'this' context.", `const add = (a, b) => a + b;\n\n// Multi-line arrow function\nconst greet = name => {\n  const message = \`Hello, \${name}\`;\n  return message;\n};\n\nconsole.log(add(10, 20));\nconsole.log(greet("Alice"));`]
-        ]
-    },
-    {
-        g: "Core Concepts", id: "objects-arrays", t: "Objects and Arrays", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>',
-        lead: "Complex data structures in JavaScript are built using Objects (key-value pairs) and Arrays (ordered lists).",
-        s: [
-            ["Working with Objects", "Objects are variables that can contain many values represented as properties.", `const car = {\n  brand: "Tesla",\n  model: "Model 3",\n  start: function() {\n    return "Engine started!";\n  }\n};\n\nconsole.log(car.brand);\nconsole.log(car.start());`],
-            ["Working with Arrays", "Arrays are special objects used to store multiple values in a single variable.", `const fruits = ["Apple", "Banana", "Cherry"];\n\nfruits.push("Mango"); // Add item\n\nfruits.forEach((fruit, index) => {\n  console.log(\`\${index + 1}. \${fruit}\`);\n});`],
-            ["Destructuring", "A syntax that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.", `// Object Destructuring\nconst user = { id: 42, username: "johndoe" };\nconst { id, username } = user;\n\n// Array Destructuring\nconst rgb = [255, 100, 50];\nconst [r, g, b] = rgb;\n\nconsole.log(\`User \${username} has ID \${id}\`);\nconsole.log(\`Red: \${r}\`);`]
-        ]
-    },
-    {
-        g: "Core Concepts", id: "modules", t: "Modules", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>',
-        lead: "Modules allow you to break up your code into separate files, making it easier to maintain and reuse.",
-        s: [
-            ["Export and Import", "Use 'export' to make functions or variables available, and 'import' to use them in another file. (Note: Imports require a module environment, so they are simulated here).", `// In math.js: \n// export const add = (a, b) => a + b;\n\n// In main.js:\n// import { add } from './math.js';\n\nconsole.log("Modules keep code organized across multiple files!");`]
-        ]
-    },
+            ["The Temporal Dead Zone (TDZ)", "Declarations using 'let' and 'const' are hoisted to the top of their block scope, but remain uninitialized in a state called the Temporal Dead Zone. Accessing them before initialization results in a ReferenceError, forcing developers to write predictable, top-down code.", `// var is hoisted and initialized as undefined
+console.log("var hoisting:", myVar); 
+var myVar = "Legacy scoping";
 
+// let and const reside in the TDZ until execution reaches them
+try {
+    console.log(myConst);
+} catch (e) {
+    console.error("TDZ Error Caught:", e.message);
+}
+const myConst = "Modern block scoping";`],
+            ["Immutability via Const", "The 'const' keyword guarantees that the memory reference assigned to an identifier cannot be reassigned. However, if the reference points to a complex object on the heap, the object's internal properties remain entirely mutable.", `const serverConfig = {
+    port: 8080,
+    secure: true
+};
+
+// Valid: Mutating the internal state of the object
+serverConfig.port = 443;
+console.log("Updated Port:", serverConfig.port);
+
+// Invalid: Reassigning the memory reference
+try {
+    serverConfig = {}; 
+} catch (e) {
+    console.error("Assignment Error:", e.message);
+}`]
+        ]
+    },
+    {
+        g: "Core Concepts", id: "data-types", t: "Data Types & Coercion", 
+        icon: ICONS.code,
+        lead: "JavaScript differentiates between primitive values (stored on the stack) and reference types (stored on the heap).",
+        s: [
+            ["Primitives vs. References", "Primitives (String, Number, Boolean, BigInt, Symbol, Undefined, Null) are immutable and passed by value. Objects, Arrays, and Functions are stored on the heap and passed by reference.", `let a = 10;
+let b = a; // Pass by value
+b = 20;
+console.log(\`a: \${a}, b: \${b}\`); // 'a' remains 10
+
+const obj1 = { role: "admin" };
+const obj2 = obj1; // Pass by reference (pointer copy)
+obj2.role = "user";
+console.log(\`obj1 role mutated: \${obj1.role}\`);`],
+            ["Type Coercion & Strict Equality", "JavaScript engines attempt to convert mismatched types during evaluation (Implicit Coercion). To prevent catastrophic bugs, strictly use the identity operator (===) which prevents type casting, as recommended by MDN.", `const numeric = 42;
+const stringified = "42";
+
+console.log("Loose Equality (==):", numeric == stringified); // true
+console.log("Strict Equality (===):", numeric === stringified); // false
+
+// Falsy evaluation
+const values = [0, "", null, undefined, NaN, false];
+console.log("All falsy values resolve to false in conditionals.");`]
+        ]
+    },
+    {
+        g: "Core Concepts", id: "functions", t: "Functions & Closures", 
+        icon: ICONS.code,
+        lead: "Functions are first-class citizens in JavaScript. A closure is a function bundled together with references to its surrounding lexical environment.",
+        s: [
+            ["Lexical Environments & Closures", "When a function returns an inner function, the inner function maintains access to the variables of the outer function, even after the outer function has completed execution. The engine preserves this lexical scope on the heap. This enables data encapsulation and currying.", `function createRateLimiter(limit) {
+    let requests = 0; // Private state protected by closure
+    
+    return function() {
+        requests++;
+        if (requests > limit) {
+            return "Rate limit exceeded. Request blocked.";
+        }
+        return \`Request \${requests} processed successfully.\`;
+    };
+}
+
+const apiLimiter = createRateLimiter(2);
+console.log(apiLimiter());
+console.log(apiLimiter());
+console.log(apiLimiter()); // Fails due to closure state`],
+            ["Generators & Iterators", "Generators, defined with function*, allow execution to be paused and resumed using the 'yield' keyword. This provides a mechanism for customizing iteration behavior and managing infinite data sequences.", `function* idGenerator() {
+    let id = 1;
+    while (true) {
+        yield id++;
+    }
+}
+
+const gen = idGenerator();
+console.log("Generated ID:", gen.next().value);
+console.log("Generated ID:", gen.next().value);`]
+        ]
+    },
+    {
+        g: "Modern JavaScript", id: "es2024-data", t: "ES2024: Advanced Data Operations", 
+        icon: ICONS.zap,
+        lead: "Recent ECMAScript specifications (ES2024-ES2025) have radically streamlined data manipulation, providing native grouping and relational operations.",
+        s: [
+            ["Object.groupBy() (ES2024)", "The ES2024 specification introduced native grouping capabilities. Object.groupBy() categorizes array elements into an object based on a provided callback logic, eliminating the need for complex reduce() implementations.", `const infrastructure = [
+    { type: "server", status: "active", name: "Alpha" },
+    { type: "database", status: "inactive", name: "Beta" },
+    { type: "server", status: "maintenance", name: "Gamma" }
+];
+
+try {
+    // Native grouping (Available in modern ES2024+ environments)
+    const grouped = Object.groupBy(infrastructure, item => item.type);
+    console.log("Servers grouped natively:", grouped.server);
+} catch (e) {
+    console.log("Object.groupBy requires an ES2024 compliant runtime.");
+}`],
+            ["Native Set Operations (ES2025)", "ES2025 standardizes mathematical set operations, embedding high-speed union, intersection, and difference computations directly into the native Set prototype.", `const currentRoles = new Set(["read", "write"]);
+const requiredRoles = new Set(["write", "delete"]);
+
+try {
+    // Native ES2025 Relational Logic
+    const overlapping = currentRoles.intersection(requiredRoles);
+    const combined = currentRoles.union(requiredRoles);
+    
+    console.log("Overlapping Roles:", Array.from(overlapping));
+    console.log("Total Roles:", Array.from(combined));
+} catch (e) {
+    console.log("Set.intersection requires an ES2025 compliant runtime.");
+}`]
+        ]
+    },
+    
     // --- ADVANCED TOPICS ---
     {
-        g: "Advanced Topics", id: "closures", t: "Closures", 
-        icon: '<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>',
-        lead: "A closure is a feature where an inner function has access to the outer (enclosing) function's variables.",
+        g: "Advanced Architecture", id: "event-loop", t: "The Event Loop & Concurrency", 
+        icon: ICONS.zap,
+        lead: "JavaScript handles asynchronous operations without blocking the main thread by utilizing the Event Loop, distinguishing precisely between Microtasks and Macrotasks.",
         s: [
-            ["Lexical Scoping", "Even after the outer function has finished executing, the inner function retains access to the scope it was created in.", `function createCounter() {\n  let count = 0; // Private variable\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\nconsole.log(counter()); // 3`]
+            ["Call Stack vs. Task Queues", "Synchronous code executes immediately on the Call Stack. When an async API completes, its callback queues. The Event Loop prioritizes the Microtask Queue (Promises, queueMicrotask) strictly over the Macrotask Queue (setTimeout, setInterval).", `console.log("1. Synchronous Execution");
+
+setTimeout(() => {
+    console.log("4. Macrotask (setTimeout) executed");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("3. Microtask (Promise) executed");
+});
+
+console.log("2. Main Thread Completion");`],
+            ["Avoiding Main Thread Blocking", "Heavy synchronous computations block UI rendering because rendering never occurs while a task is executing. To prevent 'Page Unresponsive' errors, large tasks must be split using zero-delay Macrotasks.", `function nonBlockingProcess() {
+    console.log("Processing heavy chunk...");
+    // Defers execution, allowing the browser to breathe and render DOM
+    setTimeout(() => {
+        console.log("Processing next chunk safely after yielding.");
+    }, 0);
+}
+nonBlockingProcess();`]
         ]
     },
     {
-        g: "Advanced Topics", id: "promises-async", t: "Promises and Async", 
-        icon: '<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>',
-        lead: "JavaScript handles asynchronous operations (like network requests) using Promises and the async/await syntax.",
+        g: "Advanced Architecture", id: "promises", t: "Promises & Network Controls", 
+        icon: ICONS.zap,
+        lead: "Modern async JavaScript relies on Promises. Advanced APIs provide granular control over resolution flow and network request lifetimes.",
         s: [
-            ["Promises", "A Promise represents the eventual completion (or failure) of an asynchronous operation.", `const checkWeather = new Promise((resolve, reject) => {\n  const isSunny = true;\n  if (isSunny) resolve("Go outside!");\n  else reject("Stay home.");\n});\n\ncheckWeather\n  .then(msg => console.log(msg))\n  .catch(err => console.error(err));`],
-            ["Async / Await", "Syntactic sugar over Promises, making asynchronous code look synchronous.", `const fetchUserData = async () => {\n  console.log("Fetching...");\n  // Simulate network delay\n  await new Promise(r => setTimeout(r, 1000));\n  return { user: "Vinay", role: "Admin" };\n};\n\nconst data = await fetchUserData();\nconsole.log("Data loaded:", data);`]
+            ["Promise.withResolvers() (ES2024)", "Introduced in ES2024, this method returns a plain object containing a new Promise along with its resolve and reject functions. It drastically reduces boilerplate for event-driven flows outside the promise constructor.", `const { promise, resolve, reject } = Promise.withResolvers();
+
+// External asynchronous trigger resolving the promise
+setTimeout(() => {
+    resolve("External event resolved successfully.");
+}, 500);
+
+promise.then(result => console.log("Settled via withResolvers:", result));`],
+            ["AbortController & Fetch Timeouts", "The AbortController API allows you to abort web requests. Using AbortSignal.timeout(ms) provides a clean, native way to enforce strict fetch timeouts without custom wrapper logic.", `const controller = new AbortController();
+
+console.log("Initializing strict 50ms timeout request...");
+// Simulating a native fetch timeout setup:
+// fetch('/api/data', { signal: AbortSignal.timeout(50) })
+//   .catch(err => console.error("Request aborted:", err.name));
+
+setTimeout(() => {
+    controller.abort("Manual abort triggered.");
+    console.log("Operation aborted via AbortController.");
+}, 100);`]
         ]
     },
     {
-        g: "Advanced Topics", id: "event-loop", t: "Event Loop", 
-        icon: '<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>',
-        lead: "The Event Loop is the secret behind JavaScript's asynchronous, non-blocking behavior.",
+        g: "Advanced Architecture", id: "memory-management", t: "Garbage Collection & Memory", 
+        icon: ICONS.shield,
+        lead: "The V8 engine automates memory management via a generational 'Mark-and-Sweep' garbage collector, identifying and sweeping unreachable object graphs.",
         s: [
-            ["Call Stack and Queues", "Microtasks (Promises) always run before Macrotasks (setTimeout).", `console.log("1. Script Start");\n\nsetTimeout(() => {\n  console.log("4. Macrotask (setTimeout)");\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log("3. Microtask (Promise)");\n});\n\nconsole.log("2. Script End");\n// Notice the order of execution!`]
+            ["Mark-and-Sweep Execution", "The collector establishes 'roots' (global variables, active stacks) and traces all connected references. Any object disjointed from the roots is marked as garbage and swept from the heap. V8 separates memory into a Nursery (Minor GC) and Old Generation (Major GC).", `let config = { active: true }; // Allocated on Heap
+let reference = config;        // Second pointer to same memory
+
+config = null; 
+// Memory is NOT cleared yet; 'reference' still points to it
+
+reference = null;
+// The object is now unreachable from any root. 
+// It will be swept during the next Garbage Collection cycle.
+console.log("Memory successfully orphaned for GC.");`],
+            ["WeakMaps & Cache Optimization", "WeakMaps hold 'weak' references to object keys. If no other strong references to the key exist, the garbage collector will delete the object and its entry in the WeakMap, preventing catastrophic memory leaks in caches.", `let domNode = { id: "button_01" };
+const cache = new WeakMap();
+
+// Associate metadata without preventing Garbage Collection
+cache.set(domNode, { clicks: 0 });
+
+domNode = null; 
+// The dictionary entry in the WeakMap is automatically purged by the engine.
+console.log("WeakMap safely manages the memory lifecycle.");`]
         ]
     },
     {
-        g: "Advanced Topics", id: "error-handling", t: "Error Handling", 
-        icon: '<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>',
-        lead: "Proper error handling prevents your application from crashing unexpectedly.",
+        g: "Advanced Architecture", id: "metaprogramming", t: "Proxies & Reflect API", 
+        icon: ICONS.shield,
+        lead: "The Proxy object enables metaprogramming by intercepting and redefining fundamental object operations. It is the core engine behind modern reactivity systems like Vue 3.",
         s: [
-            ["Try...Catch", "Wrap risky code in a try block, and handle the error in the catch block.", `try {\n  const num = 10;\n  // Attempting to call a non-existent function\n  num.toUpperCase(); \n} catch (error) {\n  console.log("Caught an error:");\n  console.log(error.message);\n} finally {\n  console.log("Cleanup: This runs no matter what.");\n}`]
+            ["Intercepting Object Mutations", "By defining 'traps' (e.g., get, set), Proxies enforce strict validation protocols. The Reflect API is used internally to invoke the default object behavior safely.", `const targetDatabase = { 
+    adminUser: "root",
+    status: "active" 
+};
+
+const secureProxy = new Proxy(targetDatabase, {
+    set(target, property, value, receiver) {
+        if (property === "adminUser") {
+            throw new Error("Security Violation: Cannot mutate admin identity.");
+        }
+        // Using Reflect preserves default assignment mechanics
+        return Reflect.set(target, property, value, receiver);
+    }
+});
+
+try {
+    secureProxy.adminUser = "hacker";
+} catch(e) {
+    console.log("Intercepted Trap:", e.message);
+}`]
         ]
     },
 
-    // --- LIBRARIES ---
+    // --- DOM & BROWSER APIs ---
     {
-        g: "Libraries", id: "react", t: "React", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12.500 9 5 9-5M3 16.500l9 5 9-5"/></svg>',
-        lead: "A popular library for building user interfaces using a component-based architecture.",
+        g: "Browser APIs", id: "observers", t: "High-Performance Observers", 
+        icon: ICONS.globe,
+        lead: "Modern UI architecture relies on asynchronous observer APIs to track element intersections and resize events, bypassing the severe performance overhead of synchronous event listeners.",
         s: [
-            ["JSX and Components", "React uses JSX, a syntax extension that looks like HTML inside JavaScript.", `// Conceptual React Component Example\nfunction Welcome(props) {\n  return \`<h1>Hello, \${props.name}</h1>\`;\n}\n\nconsole.log(Welcome({ name: "DocuNova User" }));`]
-        ]
-    },
-    {
-        g: "Libraries", id: "nodejs", t: "Node.js & Express", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12.500 9 5 9-5M3 16.500l9 5 9-5"/></svg>',
-        lead: "Node.js allows JS to run on the server, and Express is its most popular web framework.",
-        s: [
-            ["Express Server Concept", "Express makes setting up a backend API incredibly simple.", `// Conceptual Express Server\nconst expressApp = {\n  get: (route, callback) => console.log(\`Route \${route} registered.\`),\n  listen: (port) => console.log(\`Server running on port \${port}\`)\n};\n\nexpressApp.get('/api/users', (req, res) => {});\nexpressApp.listen(3000);`]
-        ]
-    },
-    {
-        g: "Libraries", id: "lodash", t: "Lodash", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12.500 9 5 9-5M3 16.500l9 5 9-5"/></svg>',
-        lead: "A modern JavaScript utility library delivering modularity, performance & extras.",
-        s: [
-            ["Utility Functions", "Lodash makes working with arrays, numbers, and objects much easier.", `// Conceptual Lodash cloneDeep\nconst original = { a: 1, b: { c: 2 } };\nconst clone = JSON.parse(JSON.stringify(original)); // Native deep clone trick\n\nclone.b.c = 99;\nconsole.log("Original:", original.b.c); // 2\nconsole.log("Clone:", clone.b.c); // 99`]
-        ]
-    },
+            ["IntersectionObserver Mechanics", "IntersectionObserver calculates element visibility asynchronously on a separate thread. It accepts a threshold and rootMargin, making it the gold standard for lazy-loading media and infinite scrolling without querying getBoundingClientRect().", `// Conceptual setup for IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            console.log("Element entered the viewport threshold.");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5, rootMargin: "100px" });
 
-    // --- RESOURCES ---
-    {
-        g: "Resources", id: "cheatsheet", t: "Cheatsheet", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
-        lead: "A quick reference guide for common JavaScript operations.",
-        s: [
-            ["Array Methods Cheatsheet", "Quick reference for transforming arrays.", `const arr = [1, 2, 3, 4, 5];\n\n// .map() - Transform every item\nconsole.log("Map:", arr.map(x => x * 10));\n\n// .filter() - Keep specific items\nconsole.log("Filter:", arr.filter(x => x % 2 === 0));\n\n// .reduce() - Accumulate to a single value\nconsole.log("Reduce:", arr.reduce((acc, curr) => acc + curr, 0));`]
-        ]
-    },
-    {
-        g: "Resources", id: "examples", t: "Examples", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
-        lead: "Real-world snippets to solve common programming challenges.",
-        s: [
-            ["Debounce Function", "Ensure a function is not called too frequently (e.g., search input typing).", `function debounce(func, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => func.apply(this, args), delay);\n  };\n}\n\nconst log = debounce(() => console.log("Fired!"), 500);\nlog(); log(); log(); \n// Only fires once after 500ms`]
-        ]
-    },
-    {
-        g: "Resources", id: "faq", t: "FAQ", 
-        icon: '<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
-        lead: "Frequently asked questions by JavaScript learners.",
-        s: [
-            ["null vs undefined", "What is the difference between null and undefined?", `let a; // Declared but not assigned\nlet b = null; // Explicitly set to 'no value'\n\nconsole.log("a is:", typeof a); // undefined\nconsole.log("b is:", typeof b); // object (a known bug in JS!)\nconsole.log(a === b); // false`]
+console.log("IntersectionObserver instantiated for high-performance tracking.");`],
+            ["ResizeObserver Safeguards", "ResizeObserver tracks precise DOM dimension changes. To prevent 'ResizeObserver loop limit exceeded' exceptions, dimensional mutations inside the callback must be deferred using requestAnimationFrame.", `const resizeObserver = new ResizeObserver(entries => {
+    // Defers execution to prevent layout thrashing and infinite loops
+    requestAnimationFrame(() => {
+        entries.forEach(entry => {
+            const width = entry.contentBoxSize ? entry.contentBoxSize[0].inlineSize : entry.contentRect.width;
+            console.log(\`Observed element resized to width: \${width}px\`);
+        });
+    });
+});
+
+console.log("ResizeObserver configured with frame-syncing safeguards.");`]
         ]
     }
   ];
 
-  /* ---------- DOM ELEMENTS ---------- */
+  /* ---------- DOM SELECTION ---------- */
   const sidebarNav = $('#sidebar-nav');
   const docContent = $('#doc-content');
   const tocNav = $('#toc');
   const codeEditor = $('#code-editor');
   const searchInput = $('#searchInput');
 
-  /* ---------- 1. BUILD SIDEBAR ---------- */
+  /* ---------- 1. BUILD DYNAMIC SIDEBAR ---------- */
   function buildSidebar() {
     let html = '';
     let lastGroup = '';
     
-    // Step 1: Create a grouped structure
-    const groups = {};
     T.forEach(x => {
-        if (!groups[x.g]) groups[x.g] = { icon: x.icon, items: [] };
-        groups[x.g].items.push(x);
-    });
-
-    // Step 2: Render sidebar HTML based on grouped structure
-    for (const [groupName, groupData] of Object.entries(groups)) {
+      if (x.g !== lastGroup) {
+        if (lastGroup !== '') html += '</div></div>';
         html += `<div class="grp open">
           <button class="grp-btn flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] font-semibold text-slate-100 transition-colors hover:bg-white/5" aria-expanded="true">
-            ${groupData.icon || '<span class="w-4"></span>'}
-            <span class="flex-1">${groupName}</span>
+            ${x.icon}
+            <span class="flex-1">${x.g}</span>
             <svg class="chev h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="sub ml-[19px] border-l border-white/10 pl-2">`;
-          
-        groupData.items.forEach(item => {
-            html += `<a href="#${item.id}" class="block rounded-md py-[7px] pl-3 pr-2 text-[12.5px] text-slate-400 transition-colors hover:bg-white/5 hover:text-white">${item.t}</a>`;
-        });
-        
-        html += `</div></div>`;
-    }
+        lastGroup = x.g;
+      }
+      html += `<a href="#${x.id}" class="block rounded-md py-[7px] pl-3 pr-2 text-[12.5px] text-slate-400 transition-colors hover:bg-white/5 hover:text-white" data-target="${x.id}">${x.t}</a>`;
+    });
     
-    // Temporary override to ensure the exact structure from previous templates if needed, but dynamically generating is better.
-    // The issue with the user's screenshot was that the HTML had hardcoded stub sections instead of dynamically generating them from the T array.
-    if(sidebarNav) {
-        // Fallback to hardcoded structure if elements exist but we want dynamic content
-        sidebarNav.innerHTML = html;
-    }
+    if (lastGroup !== '') html += '</div></div>';
     
+    if (sidebarNav) sidebarNav.innerHTML = html;
+    
+    // Accordion Logic
     $$('.grp').forEach(grp => {
       const sub = $('.sub', grp);
-      if(sub) sub.style.maxHeight = sub.scrollHeight + 'px';
+      if (sub) sub.style.maxHeight = sub.scrollHeight + 'px';
       const btn = $('.grp-btn', grp);
-      if(btn) {
+      if (btn) {
           btn.addEventListener('click', (e) => {
             const open = !grp.classList.contains('open');
             grp.classList.toggle('open', open);
             e.currentTarget.setAttribute('aria-expanded', open);
-            if(sub) sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
+            if (sub) sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
           });
       }
     });
@@ -229,26 +348,24 @@
 
   /* ---------- 2. RENDER MAIN CONTENT ---------- */
   let scrollSpy = null;
+
   function renderContent() {
     const hash = location.hash.slice(1);
-    
-    // Find the current active topic, or default to the first one in the array
     let i = T.findIndex(x => x.id === hash);
     if (i === -1) i = 0;
     const x = T[i];
 
-    // Highlight sidebar
-    if(sidebarNav) {
-        $$('#sidebar-nav .sub a').forEach(a => {
-            a.classList.toggle('active', a.getAttribute('href') === `#${x.id}`);
-        });
-    }
+    // Highlight active state in sidebar
+    $$('#sidebar-nav .sub a').forEach(a => {
+      a.classList.toggle('active', a.dataset.target === x.id);
+    });
+    
     closeSidebar();
 
-    // 2.1 Update Hero Section (Title & Lead)
+    // Inject Hero Information
     const topHero = $('#getting-started');
     if (topHero) {
-        // Keep the IDE part, replace only the top header part
+        // Strip previous dynamic content but preserve the IDE div
         const ideHTML = topHero.innerHTML.substring(topHero.innerHTML.indexOf('<!-- IDE -->'));
         topHero.innerHTML = `
           <div class="reveal flex items-center gap-3 hl" id="top">
@@ -256,19 +373,16 @@
             <h2 class="text-[28px] font-bold tracking-tight text-white">${x.t}</h2>
           </div>
           <p class="reveal mt-2 text-[13px] text-slate-300">${x.lead}</p>
-          ${ideHTML}
-        `;
+          ${ideHTML}`;
     }
 
-    // 2.2 Generate Main Theory Sections & Right Sidebar TOC
+    // Generate Content Theory Blocks and TOC
     let mainHtml = '';
     let tocHtml = `<a href="#top" class="toc flex items-center gap-3 py-[5px] text-[12.5px] font-medium text-amber-300" data-t="top"><span class="dot h-2 w-2 flex-none rounded-full bg-amber-400 shadow-[0_0_10px_#fbbf24]"></span>Overview</a>
     <div class="ml-[5px] border-l border-white/10 pl-[17px]">`;
 
     x.s.forEach((sec, idx) => {
       const slug = "sec-" + idx;
-      
-      // Main Body Section
       mainHtml += `<div id="${slug}" class="hl reveal scroll-mt-24">
         <h3 class="text-xl font-semibold text-white">${sec[0]}</h3>
         ${sec[1] ? `<p class="mt-2 text-[13.5px] leading-relaxed text-slate-300">${sec[1]}</p>` : ''}
@@ -281,7 +395,6 @@
         </div>
       </div>`;
       
-      // TOC Entry
       tocHtml += `<a href="#${slug}" class="toc block py-[5px] text-[12.5px] text-slate-400 hover:text-white" data-t="${slug}">${sec[0]}</a>`;
     });
     
@@ -291,14 +404,13 @@
     if(docContent) docContent.innerHTML = mainHtml;
     if(tocNav) tocNav.innerHTML = tocHtml;
     
-    // 2.3 Load the first snippet of this topic into the main IDE
+    // Load the first snippet of this topic into the main IDE
     const actualEditor = $('#code-editor');
     if(actualEditor && x.s.length > 0) {
         actualEditor.value = x.s[0][2];
     }
     
-    // 2.4 Bind "Try It" buttons dynamically
-    // When clicked, it loads that specific snippet into the IDE and scrolls up
+    // Bind "Try It" buttons dynamically
     $$('.try-btn').forEach(b => {
       b.addEventListener('click', () => {
         if(actualEditor) {
@@ -308,11 +420,12 @@
       });
     });
 
-    // Re-initialize UI scripts for the newly injected HTML
+    // Re-initialize Observers for the newly injected HTML
     initScrollReveal();
     initScrollSpy();
   }
 
+  /* ---------- 3. UI ANIMATION HELPERS ---------- */
   function initScrollReveal() {
     const reveals = $$('.reveal');
     const io = new IntersectionObserver((entries) => {
@@ -345,7 +458,7 @@
     $$('.hl').forEach(el => scrollSpy.observe(el));
   }
 
-  /* ---------- 4. JAVASCRIPT NATIVE EXECUTION ---------- */
+  /* ---------- 4. JAVASCRIPT NATIVE JIT EXECUTION ENGINE ---------- */
   const runBtn = $('#runBtn');
   const runLabel = $('#runLabel');
   const out = $('#out');
@@ -364,35 +477,43 @@
         void ide.offsetWidth;
         ide.classList.add('flash');
 
-        // Capture console.log output dynamically
+        // Capture console.log output dynamically from the JIT engine
         let outputBuffer = [];
         const originalLog = console.log;
+        const originalError = console.error;
+        
         console.log = function(...args) {
             outputBuffer.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : a).join(' '));
             originalLog.apply(console, args);
         };
+        
+        console.error = function(...args) {
+            outputBuffer.push("ERROR: " + args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : a).join(' '));
+            originalError.apply(console, args);
+        };
 
         try {
-            // Evaluate JS Code natively
-            // Wrapping in async function to support top-level await in editor
+            // Evaluate JS Code natively with top-level await support mapping
             const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
             const executableCode = new AsyncFunction(codeEditor.value);
             
             executableCode().then(() => {
-                outBody.textContent = outputBuffer.join('\n') || "(no output)";
+                outBody.textContent = outputBuffer.join('\n') || "(Execution complete. No output.)";
                 outBody.style.color = "";
             }).catch(err => {
                 outBody.textContent = String(err);
                 outBody.style.color = "#ff7b72";
             }).finally(() => {
-                console.log = originalLog; // Restore console
+                console.log = originalLog; 
+                console.error = originalError;
                 finishRun();
             });
             
         } catch (err) {
             console.log = originalLog;
+            console.error = originalError;
             outBody.textContent = String(err);
-            outBody.style.color = "#ff7b72"; // Error color
+            outBody.style.color = "#ff7b72"; 
             finishRun();
         }
       });
@@ -407,14 +528,13 @@
       }, 300);
   }
 
-  // Keyboard Shortcuts
-  const codeEditorEl = $('#code-editor');
-  if(codeEditorEl) {
-    codeEditorEl.addEventListener("keydown", e => {
+  /* ---------- 5. UX & ACCESSIBILITY SHORTCUTS ---------- */
+  if(codeEditor) {
+    codeEditor.addEventListener("keydown", e => {
       if (e.key === "Tab") {
         e.preventDefault();
-        const s = codeEditorEl.selectionStart;
-        codeEditorEl.setRangeText("  ", s, codeEditorEl.selectionEnd, "end"); // JS prefers 2-space tab
+        const s = codeEditor.selectionStart;
+        codeEditor.setRangeText("  ", s, codeEditor.selectionEnd, "end"); 
       }
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
@@ -423,12 +543,11 @@
     });
   }
 
-  // Copy Button
   const copyBtn = $('#copyBtn');
   const copyLabel = $('#copyLabel');
   if(copyBtn) {
       copyBtn.addEventListener('click', async () => {
-        const text = codeEditorEl ? codeEditorEl.value : '';
+        const text = codeEditor ? codeEditor.value : '';
         try {
           await navigator.clipboard.writeText(text);
         } catch {
@@ -444,7 +563,6 @@
       });
   }
 
-  /* ---------- Sidebar & Modals ---------- */
   const sidebar = $('#sidebar');
   const overlay = $('#overlay');
   const menuBtn = $('#menuBtn');
@@ -457,10 +575,11 @@
   const verMenu = $('#verMenu');
   function closeVer() { if(verMenu) verMenu.classList.add('hidden'); }
   if(verBtn) verBtn.addEventListener('click', (e) => { e.stopPropagation(); verMenu.classList.toggle('hidden'); });
-  $$('#verMenu li').forEach((li) => li.addEventListener('click', () => { $('#verLabel').textContent = li.textContent; closeVer(); }));
+  if (verMenu) {
+      $$('li', verMenu).forEach((li) => li.addEventListener('click', () => { $('#verLabel').textContent = li.textContent; closeVer(); }));
+  }
   document.addEventListener('click', closeVer);
-  
-  // Global Keyboard Shortcuts (Ctrl+K)
+
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
@@ -472,10 +591,9 @@
     }
   });
 
-  // VERY IMPORTANT: When the hash changes (user clicks sidebar link), re-render content
   window.addEventListener('hashchange', renderContent);
 
-  // Initialize
+  // Application Bootstrap
   buildSidebar();
   renderContent();
 })();
