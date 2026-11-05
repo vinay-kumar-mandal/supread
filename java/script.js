@@ -2,167 +2,562 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* ---------- Ctrl/Cmd + K ---------- */
-  const searchInput = $('#searchInput');
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      searchInput.focus();
-      searchInput.select();
-    } else if (e.key === 'Escape') {
-      searchInput.blur();
-      closeSidebar();
-      closeVer();
-    }
-  });
-
-  /* ---------- Sidebar collapsible groups ---------- */
-  const setHeight = (grp, open) => {
-    const sub = $('.sub', grp);
-    sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
+  /* ---------- SVG ASSETS ---------- */
+  const ICONS = {
+    book: `<svg class="h-4 w-4 text-violet-200" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>`,
+    code: `<svg class="h-4 w-4 flex-none text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.500 20.500 7v10L12 21.500 3.500 17V7z"/><path d="M12 12 3.500 7M12 12l8.500-5M12 12v9.500"/></svg>`,
+    zap: `<svg class="h-4 w-4 flex-none text-amber-400" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.500 2.900 6 6.600.9-4.800 4.600 1.200 6.500L12 17.300l-5.900 3.200 1.200-6.500L2.500 9.400l6.600-.9z"/></svg>`,
+    globe: `<svg class="h-4 w-4 flex-none text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>`,
+    shield: `<svg class="h-4 w-4 flex-none text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
   };
-  $$('.grp').forEach((grp) => {
-    setHeight(grp, true); // all open by default
-    $('.grp-btn', grp).addEventListener('click', (e) => {
-      const open = !grp.classList.contains('open');
-      grp.classList.toggle('open', open);
-      e.currentTarget.setAttribute('aria-expanded', open);
-      setHeight(grp, open);
-    });
-  });
-  window.addEventListener('resize', () =>
-    $$('.grp.open').forEach((g) => setHeight(g, true))
-  );
 
-  // active child link
-  $$('.sub a').forEach((a) =>
-    a.addEventListener('click', () => {
-      $$('.sub a').forEach((x) => x.classList.remove('active'));
-      a.classList.add('active');
-      closeSidebar();
-    })
-  );
-
-  /* ---------- Mobile drawer ---------- */
-  const sidebar = $('#sidebar');
-  const overlay = $('#overlay');
-  const menuBtn = $('#menuBtn');
-  function openSidebar() {
-    sidebar.classList.remove('-translate-x-full');
-    overlay.classList.remove('hidden');
-    menuBtn.classList.add('open');
-  }
-  function closeSidebar() {
-    if (matchMedia('(min-width:1024px)').matches) return;
-    sidebar.classList.add('-translate-x-full');
-    overlay.classList.add('hidden');
-    menuBtn.classList.remove('open');
-  }
-  menuBtn.addEventListener('click', () =>
-    sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar()
-  );
-  overlay.addEventListener('click', closeSidebar);
-
-  /* ---------- Version dropdown ---------- */
-  const verBtn = $('#verBtn');
-  const verMenu = $('#verMenu');
-  function closeVer() { verMenu.classList.add('hidden'); }
-  verBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    verMenu.classList.toggle('hidden');
-  });
-  $$('li', verMenu).forEach((li) =>
-    li.addEventListener('click', () => {
-      $('#verLabel').textContent = li.textContent;
-      closeVer();
-    })
-  );
-  document.addEventListener('click', closeVer);
-
-  /* ---------- Copy ---------- */
-  const copyBtn = $('#copyBtn');
-  const copyLabel = $('#copyLabel');
-  copyBtn.addEventListener('click', async () => {
-    const text = $$('#code .t').map((t) => t.textContent).join('\n');
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
+  /* ---------- EXHAUSTIVE JAVA DOCUMENTATION DATA ---------- */
+  const T = [
+    // --- GETTING STARTED ---
+    {
+        g: "Getting Started", id: "intro", t: "Introduction & Philosophy", 
+        icon: ICONS.book,
+        lead: "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible, embodied by the WORA (Write Once, Run Anywhere) principle.",
+        s: [
+            ["The JVM Architecture", "Java source code (.java) is compiled into platform-independent bytecode (.class) by the javac compiler. This bytecode is then executed by the Java Virtual Machine (JVM), which employs a Just-In-Time (JIT) compiler to optimize hot code paths into native machine code at runtime.", `// A canonical Hello World demonstrating class structure
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("JVM Initialized. Hello, World!");
+        
+        // The JVM handles memory allocation automatically
+        String architecture = System.getProperty("os.arch");
+        System.out.println("Running on architecture: " + architecture);
     }
-    copyLabel.textContent = 'Copied!';
-    setTimeout(() => (copyLabel.textContent = 'Copy'), 1600);
-  });
+}`],
+            ["Static Typing & Paradigm", "Java enforces strong, static typing. Every variable must be declared with a data type. The language strictly adheres to the Object-Oriented paradigm; every function and variable must reside within a Class structure.", `public class User {
+    // Strict type declaration
+    private final String username;
+    private final int id;
 
-  /* ---------- Run (terminal mimicry) ---------- */
+    public User(String username, int id) {
+        this.username = username;
+        this.id = id;
+    }
+
+    public void display() {
+        System.out.println("User: " + this.username + " [ID: " + this.id + "]");
+    }
+
+    public static void main(String[] args) {
+        User admin = new User("admin_vinay", 101);
+        admin.display();
+    }
+}`]
+        ]
+    },
+    
+    // --- CORE CONCEPTS ---
+    {
+        g: "Core Concepts", id: "variables", t: "Variables & Memory", 
+        icon: ICONS.code,
+        lead: "Java divides memory into the Stack (for primitives and object references) and the Heap (for actual object instances).",
+        s: [
+            ["Primitives vs. References", "Java has 8 primitive types (int, boolean, double, etc.) stored directly on the stack. Objects (including Arrays and Strings) are stored on the heap, while their reference (memory address) is kept on the stack.", `public class MemoryDemo {
+    public static void main(String[] args) {
+        // Primitive: Stored on the Stack
+        int primitiveValue = 42;
+        
+        // Reference: Object is on Heap, 'text' reference is on Stack
+        String text = new String("Immutable String");
+        
+        // String Literal Pool optimization
+        String pooledText = "Immutable String";
+        
+        System.out.println("Primitive: " + primitiveValue);
+        System.out.println("Same Reference? " + (text == pooledText)); // false
+        System.out.println("Same Value? " + text.equals(pooledText)); // true
+    }
+}`],
+            ["Var Keyword (Local Variable Type Inference)", "Introduced in Java 10, the 'var' keyword allows the compiler to infer the type of a local variable from its initializer, reducing boilerplate without sacrificing static typing.", `import java.util.ArrayList;
+import java.util.HashMap;
+
+public class VarDemo {
+    public static void main(String[] args) {
+        // Legacy boilerplate
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        
+        // Modern Java (Java 10+)
+        var modernMap = new HashMap<String, Integer>();
+        modernMap.put("SystemA", 200);
+        
+        var status = "Active"; // Inferred as String
+        var code = 200;        // Inferred as int
+        
+        System.out.println(status + " - Code: " + code);
+    }
+}`]
+        ]
+    },
+    {
+        g: "Core Concepts", id: "oop", t: "Object-Oriented Design", 
+        icon: ICONS.shield,
+        lead: "Java is fundamentally object-oriented, utilizing concepts of Encapsulation, Inheritance, Polymorphism, and Abstraction to construct modular, scalable software.",
+        s: [
+            ["Encapsulation & Access Modifiers", "Encapsulation binds data and the methods that manipulate it into a single unit (class), restricting direct access via modifiers (private, protected, public).", `class BankAccount {
+    private double balance; // Encapsulated data
+
+    public BankAccount(double initialBalance) {
+        if(initialBalance > 0) this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if(amount > 0) this.balance += amount;
+    }
+
+    public double getBalance() { // Controlled access
+        return this.balance;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount(1000.0);
+        acc.deposit(500.0);
+        System.out.println("Balance: $" + acc.getBalance());
+    }
+}`],
+            ["Records (Immutable Data Carriers)", "Introduced as a standard feature in Java 16, 'record' classes provide a compact syntax for declaring immutable data carrier classes, automatically generating getters, equals(), hashCode(), and toString().", `// Modern Data Carrier (Java 16+)
+record Point(int x, int y) {}
+
+public class RecordDemo {
+    public static void main(String[] args) {
+        Point p1 = new Point(10, 20);
+        Point p2 = new Point(10, 20);
+        
+        // toString() is automatically generated
+        System.out.println("Point coordinates: " + p1);
+        
+        // equals() correctly evaluates value, not reference
+        System.out.println("Points are equal: " + p1.equals(p2));
+    }
+}`]
+        ]
+    },
+
+    // --- MODERN JAVA (17 - 21+) ---
+    {
+        g: "Modern Java", id: "pattern-matching", t: "Pattern Matching & Switch", 
+        icon: ICONS.zap,
+        lead: "Recent Java releases (17-21) have drastically improved language ergonomics, introducing Pattern Matching and advanced Switch Expressions to eliminate verbose casting and boilerplate logic.",
+        s: [
+            ["Pattern Matching for instanceof", "Java 16 introduced pattern matching for the instanceof operator, allowing immediate extraction of the casted variable, eliminating redundant explicit casts.", `public class PatternMatching {
+    public static void process(Object obj) {
+        // Legacy Approach:
+        // if (obj instanceof String) {
+        //     String s = (String) obj;
+        //     System.out.println(s.length());
+        // }
+        
+        // Modern Java (16+) Approach:
+        if (obj instanceof String s && s.length() > 5) {
+            System.out.println("Long String Detected: " + s.toUpperCase());
+        } else {
+            System.out.println("Other object or short string.");
+        }
+    }
+
+    public static void main(String[] args) {
+        process("DocuNova Architecture");
+    }
+}`],
+            ["Switch Expressions & Yield", "Java 14+ standardized Switch Expressions, allowing switch to return a value, utilizing the '->' syntax to prevent fall-through, and introducing the 'yield' keyword for complex blocks.", `public class SwitchDemo {
+    public static void main(String[] args) {
+        String day = "SATURDAY";
+        
+        // Modern Switch Expression (Java 14+)
+        String typeOfDay = switch (day) {
+            case "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY" -> "Weekday";
+            case "SATURDAY", "SUNDAY" -> {
+                System.out.println("Calculating weekend metrics...");
+                yield "Weekend"; // Yields value from a block
+            }
+            default -> throw new IllegalArgumentException("Invalid day");
+        };
+        
+        System.out.println("Day type: " + typeOfDay);
+    }
+}`]
+        ]
+    },
+    {
+        g: "Modern Java", id: "virtual-threads", t: "Project Loom & Virtual Threads", 
+        icon: ICONS.zap,
+        lead: "Java 21 introduced Virtual Threads (Project Loom), revolutionizing concurrency by providing lightweight, JVM-managed threads that allow writing massive-scale synchronous code without blocking OS threads.",
+        s: [
+            ["The Concurrency Paradigm Shift", "Historically, Java threads mapped 1:1 to OS threads (Platform Threads), limiting scalability due to memory overhead. Virtual Threads map M:N to OS threads. When a Virtual Thread blocks (e.g., waiting for I/O), the JVM unmounts it and runs another, theoretically allowing millions of concurrent threads.", `import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
+
+public class VirtualThreadsDemo {
+    public static void main(String[] args) {
+        System.out.println("Launching 10,000 Virtual Threads...");
+        long start = System.currentTimeMillis();
+        
+        // Java 21+ Virtual Thread Executor
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            IntStream.range(0, 10_000).forEach(i -> {
+                executor.submit(() -> {
+                    try {
+                        Thread.sleep(100); // Simulated Blocking I/O
+                    } catch (InterruptedException e) {}
+                });
+            });
+        } // Executor implicitly awaits termination here
+        
+        long time = System.currentTimeMillis() - start;
+        System.out.println("Completed in " + time + "ms without exhausting OS threads.");
+    }
+}`]
+        ]
+    },
+
+    // --- ADVANCED TOPICS ---
+    {
+        g: "Advanced Architecture", id: "streams", t: "Streams API & Lambdas", 
+        icon: ICONS.globe,
+        lead: "Introduced in Java 8, the Streams API enables functional-style operations on streams of elements, supporting map-reduce transformations and parallel processing.",
+        s: [
+            ["Declarative Data Processing", "Streams separate the 'what' from the 'how', allowing declarative pipelines of intermediate (filter, map) and terminal (collect, reduce) operations.", `import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamDemo {
+    public static void main(String[] args) {
+        List<String> servers = Arrays.asList("Alpha", "Beta", "Gamma", "Delta");
+        
+        List<String> filtered = servers.stream()
+            .filter(s -> s.length() > 4)    // Intermediate: keep length > 4
+            .map(String::toUpperCase)       // Intermediate: transform
+            .collect(Collectors.toList());  // Terminal: gather results
+            
+        System.out.println("Processed Servers: " + filtered);
+    }
+}`],
+            ["Parallel Streams", "Streams can be seamlessly parallelized to leverage multi-core processors using the common ForkJoinPool, though they should be used cautiously on small datasets due to thread context-switching overhead.", `import java.util.stream.LongStream;
+
+public class ParallelDemo {
+    public static void main(String[] args) {
+        long start = System.currentTimeMillis();
+        
+        // Parallel computation
+        long sum = LongStream.rangeClosed(1, 10_000_000)
+            .parallel()
+            .sum();
+            
+        long end = System.currentTimeMillis();
+        System.out.println("Sum: " + sum + " | Time: " + (end - start) + "ms");
+    }
+}`]
+        ]
+    },
+    {
+        g: "Advanced Architecture", id: "memory-gc", t: "Garbage Collection & Memory", 
+        icon: ICONS.shield,
+        lead: "The JVM manages memory automatically. Modern JVMs utilize advanced algorithms like G1GC and ZGC to handle massive heaps with sub-millisecond pause times.",
+        s: [
+            ["G1 Garbage Collector", "The default collector since Java 9, G1GC divides the heap into equal-sized regions and performs concurrent marking, targeting specific pause-time goals.", `public class GCDemo {
+    public static void main(String[] args) {
+        System.out.println("Executing memory intensive tasks...");
+        
+        for (int i = 0; i < 100_000; i++) {
+            // Allocating objects that immediately lose their reference
+            String temp = new String("Temporary Data " + i);
+        }
+        
+        // Suggesting GC execution (JVM may ignore this)
+        System.gc(); 
+        System.out.println("Nursery (Young Gen) likely cleared via Minor GC.");
+    }
+}`]
+        ]
+    }
+  ];
+
+  /* ---------- DOM SELECTION ---------- */
+  const sidebarNav = $('#sidebar-nav');
+  const docContent = $('#doc-content');
+  const tocNav = $('#toc');
+  const codeEditor = $('#code-editor');
+  const searchInput = $('#searchInput');
+
+  /* ---------- 1. BUILD DYNAMIC SIDEBAR ---------- */
+  function buildSidebar() {
+    let html = '';
+    let lastGroup = '';
+    
+    T.forEach(x => {
+      if (x.g !== lastGroup) {
+        if (lastGroup !== '') html += '</div></div>';
+        html += `<div class="grp open">
+          <button class="grp-btn flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] font-semibold text-slate-100 transition-colors hover:bg-white/5" aria-expanded="true">
+            ${x.icon}
+            <span class="flex-1">${x.g}</span>
+            <svg class="chev h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="sub ml-[19px] border-l border-white/10 pl-2">`;
+        lastGroup = x.g;
+      }
+      html += `<a href="#${x.id}" class="block rounded-md py-[7px] pl-3 pr-2 text-[12.5px] text-slate-400 transition-colors hover:bg-white/5 hover:text-white" data-target="${x.id}">${x.t}</a>`;
+    });
+    
+    if (lastGroup !== '') html += '</div></div>';
+    
+    if (sidebarNav) sidebarNav.innerHTML = html;
+    
+    // Accordion Logic
+    $$('.grp').forEach(grp => {
+      const sub = $('.sub', grp);
+      if (sub) sub.style.maxHeight = sub.scrollHeight + 'px';
+      const btn = $('.grp-btn', grp);
+      if (btn) {
+          btn.addEventListener('click', (e) => {
+            const open = !grp.classList.contains('open');
+            grp.classList.toggle('open', open);
+            e.currentTarget.setAttribute('aria-expanded', open);
+            if (sub) sub.style.maxHeight = open ? sub.scrollHeight + 'px' : '0px';
+          });
+      }
+    });
+  }
+
+  /* ---------- 2. RENDER MAIN CONTENT ---------- */
+  let scrollSpy = null;
+
+  function renderContent() {
+    const hash = location.hash.slice(1);
+    let i = T.findIndex(x => x.id === hash);
+    if (i === -1) i = 0;
+    const x = T[i];
+
+    // Highlight active state in sidebar
+    $$('#sidebar-nav .sub a').forEach(a => {
+      a.classList.toggle('active', a.dataset.target === x.id);
+    });
+    
+    closeSidebar();
+
+    // Inject Hero Information
+    const topHero = $('#getting-started');
+    if (topHero) {
+        // Strip previous dynamic content but preserve the IDE div
+        const ideHTML = topHero.innerHTML.substring(topHero.innerHTML.indexOf('<!-- IDE -->'));
+        topHero.innerHTML = `
+          <div class="reveal flex items-center gap-3 hl" id="top">
+            <span class="h-8 w-1.5 rounded-full bg-gradient-to-b from-blue-400 to-indigo-600 shadow-[0_0_14px_#60a5fa]"></span>
+            <h2 class="text-[28px] font-bold tracking-tight text-white">${x.t}</h2>
+          </div>
+          <p class="reveal mt-2 text-[13px] text-slate-300">${x.lead}</p>
+          ${ideHTML}`;
+    }
+
+    // Generate Content Theory Blocks and TOC
+    let mainHtml = '';
+    let tocHtml = `<a href="#top" class="toc flex items-center gap-3 py-[5px] text-[12.5px] font-medium text-blue-400" data-t="top"><span class="dot h-2 w-2 flex-none rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span>Overview</a>
+    <div class="ml-[5px] border-l border-white/10 pl-[17px]">`;
+
+    x.s.forEach((sec, idx) => {
+      const slug = "sec-" + idx;
+      mainHtml += `<div id="${slug}" class="hl reveal scroll-mt-24">
+        <h3 class="text-xl font-semibold text-white">${sec[0]}</h3>
+        ${sec[1] ? `<p class="mt-2 text-[13.5px] leading-relaxed text-slate-300">${sec[1]}</p>` : ''}
+        <div class="mt-4 overflow-hidden rounded-xl border border-white/[.07] bg-[#05071a]/80">
+          <div class="flex items-center justify-between border-b border-white/[.07] bg-white/[.03] px-3 py-2">
+            <span class="text-[12px] font-medium text-slate-300">Java</span>
+            <button data-idx="${idx}" class="try-btn flex items-center gap-1.5 rounded-lg bg-white/[.05] px-3 py-1 text-[11px] font-medium transition-colors hover:bg-white/10 text-white">Try it <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+          <pre class="overflow-x-auto p-4 font-mono text-[12.5px] leading-[20px] text-slate-200"><code>${sec[2].replace(/</g, '&lt;')}</code></pre>
+        </div>
+      </div>`;
+      
+      tocHtml += `<a href="#${slug}" class="toc block py-[5px] text-[12.5px] text-slate-400 hover:text-white" data-t="${slug}">${sec[0]}</a>`;
+    });
+    
+    tocHtml += `</div>`;
+    
+    // Inject generated HTML
+    if(docContent) docContent.innerHTML = mainHtml;
+    if(tocNav) tocNav.innerHTML = tocHtml;
+    
+    // Load the first snippet of this topic into the main IDE
+    const actualEditor = $('#code-editor');
+    if(actualEditor && x.s.length > 0) {
+        actualEditor.value = x.s[0][2];
+    }
+    
+    // Bind "Try It" buttons dynamically
+    $$('.try-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        if(actualEditor) {
+            actualEditor.value = x.s[parseInt(b.dataset.idx)][2];
+            window.scrollTo({ top: document.getElementById('getting-started').offsetTop - 80, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Re-initialize Observers for the newly injected HTML
+    initScrollReveal();
+    initScrollSpy();
+  }
+
+  /* ---------- 3. UI ANIMATION HELPERS ---------- */
+  function initScrollReveal() {
+    const reveals = $$('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('show'); io.unobserve(en.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach((el, i) => { el.style.transitionDelay = `${Math.min(i * 50, 300)}ms`; io.observe(el); });
+    setTimeout(() => reveals.forEach((el) => (el.style.transitionDelay = '')), 1000);
+  }
+
+  function initScrollSpy() {
+    if (scrollSpy) scrollSpy.disconnect();
+    const tocLinks = $$('.toc');
+    scrollSpy = new IntersectionObserver((entries) => {
+      const vis = entries.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (vis.length) {
+        const id = vis[0].target.id;
+        tocLinks.forEach(a => {
+          const on = a.dataset.t === id;
+          if (a.dataset.t === 'top') {
+            a.classList.toggle('text-blue-400', on);
+            const dot = $('.dot', a);
+            if (dot) dot.style.opacity = on ? 1 : 0;
+          } else {
+            a.classList.toggle('text-white', on);
+            a.classList.toggle('text-slate-400', !on);
+          }
+        });
+      }
+    }, { rootMargin: '-90px 0px -60% 0px' });
+    $$('.hl').forEach(el => scrollSpy.observe(el));
+  }
+
+  /* ---------- 4. JAVA EXECUTION ENGINE (PISTON API) ---------- */
   const runBtn = $('#runBtn');
   const runLabel = $('#runLabel');
   const out = $('#out');
+  const outBody = $('#outBody');
   const ide = $('#ide');
   let running = false;
-  runBtn.addEventListener('click', () => {
-    if (running) return;
-    running = true;
-    runBtn.classList.add('running');
-    runLabel.textContent = 'Running';
-    out.classList.add('loading'); // fade current output away, show "Running..."
-    ide.classList.remove('flash');
-    void ide.offsetWidth;
-    ide.classList.add('flash'); // brief loading flash
-    setTimeout(() => {
-      out.classList.remove('loading'); // output fades back in
-      runBtn.classList.remove('running');
-      runLabel.textContent = 'Run';
-      running = false;
-    }, 900);
-  });
+  
+  if(runBtn) {
+      runBtn.addEventListener('click', async () => {
+        if (running) return;
+        running = true;
+        runBtn.classList.add('running');
+        runLabel.textContent = 'Compiling...';
+        out.classList.add('loading');
+        ide.classList.remove('flash');
+        void ide.offsetWidth;
+        ide.classList.add('flash');
 
-  /* ---------- Scroll reveal ---------- */
-  const reveals = $$('.reveal');
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          en.target.classList.add('show');
-          io.unobserve(en.target);
+        try {
+            // Using Piston API to compile and run Java
+            const response = await fetch("https://emacs.piston.rs/api/v2/execute", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    language: "java",
+                    version: "15.0.2",
+                    files: [{ content: codeEditor.value }]
+                })
+            });
+            const data = await response.json();
+            
+            if (data.compile && data.compile.code !== 0) {
+                outBody.textContent = data.compile.output;
+                outBody.style.color = "#ff7b72"; // Error color
+            } else if (data.run && data.run.code !== 0) {
+                outBody.textContent = data.run.output;
+                outBody.style.color = "#ff7b72"; // Runtime Error color
+            } else {
+                outBody.textContent = data.run.output || "(Execution complete. No output.)";
+                outBody.style.color = ""; // Success color
+            }
+        } catch (e) { 
+            outBody.textContent = "Compilation failed. Check your internet connection or API status."; 
+            outBody.style.color = "#ff7b72";
         }
-      }),
-    { threshold: 0.1 }
-  );
-  reveals.forEach((el, i) => {
-    el.style.transitionDelay = `${Math.min(i * 70, 350)}ms`;
-    io.observe(el);
-  });
-  setTimeout(() => reveals.forEach((el) => (el.style.transitionDelay = '')), 2000);
+        
+        setTimeout(() => {
+          out.classList.remove('loading');
+          runBtn.classList.remove('running');
+          runLabel.textContent = 'Run';
+          running = false;
+        }, 300);
+      });
+  }
 
-  /* ---------- "On this page" scroll-spy ---------- */
-  const tocLinks = $$('.toc');
-  const map = new Map(tocLinks.map((a) => [a.dataset.t, a]));
-  const setActive = (id) => {
-    tocLinks.forEach((a) => {
-      const on = a.dataset.t === id;
-      const top = a.classList.contains('flex'); // top-level entries
-      a.classList.toggle('text-violet-300', on && top);
-      a.classList.toggle('text-white', on && !top);
-      a.classList.toggle('text-slate-400', !on && !top);
-      a.classList.toggle('text-slate-300', !on && top);
-      const dot = $('.dot', a);
-      if (dot) dot.style.opacity = on ? 1 : 0;
+  /* ---------- 5. UX & ACCESSIBILITY SHORTCUTS ---------- */
+  if(codeEditor) {
+    codeEditor.addEventListener("keydown", e => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const s = codeEditor.selectionStart;
+        codeEditor.setRangeText("    ", s, codeEditor.selectionEnd, "end"); // Java prefers 4-space tab
+      }
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        runBtn.click();
+      }
     });
-  };
-  const spy = new IntersectionObserver(
-    (entries) => {
-      const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      if (vis.length) setActive(vis[0].target.id);
-    },
-    { rootMargin: '-80px 0px -60% 0px' }
-  );
-  [...map.keys()].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) spy.observe(el);
+  }
+
+  const copyBtn = $('#copyBtn');
+  const copyLabel = $('#copyLabel');
+  if(copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const text = codeEditor ? codeEditor.value : '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        copyLabel.textContent = 'Copied!';
+        setTimeout(() => (copyLabel.textContent = 'Copy'), 1600);
+      });
+  }
+
+  const sidebar = $('#sidebar');
+  const overlay = $('#overlay');
+  const menuBtn = $('#menuBtn');
+  function openSidebar() { sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); menuBtn.classList.add('open'); }
+  function closeSidebar() { if (matchMedia('(min-width:1024px)').matches) return; sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); menuBtn.classList.remove('open'); }
+  if(menuBtn) menuBtn.addEventListener('click', () => sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar());
+  if(overlay) overlay.addEventListener('click', closeSidebar);
+
+  const verBtn = $('#verBtn');
+  const verMenu = $('#verMenu');
+  function closeVer() { if(verMenu) verMenu.classList.add('hidden'); }
+  if(verBtn) verBtn.addEventListener('click', (e) => { e.stopPropagation(); verMenu.classList.toggle('hidden'); });
+  if (verMenu) {
+      $$('li', verMenu).forEach((li) => li.addEventListener('click', () => { $('#verLabel').textContent = li.textContent; closeVer(); }));
+  }
+  document.addEventListener('click', closeVer);
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if(searchInput) { searchInput.focus(); searchInput.select(); }
+    } else if (e.key === 'Escape') {
+      if(searchInput) searchInput.blur();
+      closeSidebar();
+      closeVer();
+    }
   });
+
+  window.addEventListener('hashchange', renderContent);
+
+  // Application Bootstrap
+  buildSidebar();
+  renderContent();
 })();
